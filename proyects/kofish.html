@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KinglyFenixStudios</title>
+    <title>KinglyBosses - KinglyFenixStudios</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -42,7 +42,7 @@
         }
 
         .logo {
-            width: 50px; /* Reducido de 200px a 150px */
+            width: 200px;
             transition: transform 0.3s ease, filter 0.3s ease;
             filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
         }
@@ -171,131 +171,243 @@
             color: #0d0d0d;
         }
 
-        /* Hero */
-        .hero {
+        /* Project Details */
+        .project-details {
+            padding: 100px 40px;
             text-align: center;
-            padding: 120px 40px;
-            position: relative;
             background: linear-gradient(to bottom, rgba(13, 13, 13, 0.8), #0d0d0d);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 {
+        .project-details h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 64px;
+            font-size: 48px;
             background: linear-gradient(45deg, #00D4FF, #e6e6e6);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 20px;
             animation: slide-up 1s ease;
         }
 
-        .hero p {
+        .project-details .description {
             color: #b3b3b3;
-            font-size: 22px;
-            max-width: 800px;
-            margin: 25px auto;
+            font-size: 18px;
+            max-width: 900px;
+            margin: 0 auto 40px;
             animation: slide-up 1.2s ease;
         }
 
-        .hero .btn {
+        .discord-callout {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 40px auto;
+            border: 1px solid #00D4FF;
+            animation: slide-up 1.4s ease;
+        }
+
+        .discord-callout p {
+            color: #e6e6e6;
+            font-size: 16px;
+        }
+
+        .discord-callout a {
+            color: #00D4FF;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .discord-callout a:hover {
+            text-decoration: underline;
+        }
+
+        .features, .commands, .permissions, .support, .dependencies, .versions, .changelog {
+            max-width: 1000px;
+            margin: 60px auto;
+        }
+
+        .features h2, .commands h2, .permissions h2, .support h2, .dependencies h2, .versions h2, .changelog h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 28px;
+            color: #e6e6e6;
+            margin: 40px 0 25px;
+            position: relative;
+            animation: slide-up 1.6s ease;
+        }
+
+        .features h2::after, .commands h2::after, .permissions h2::after, .support h2::after, .dependencies h2::after, .versions h2::after, .changelog h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: #00D4FF;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .features ul, .commands ul, .permissions ul, .changelog ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li, .commands li, .permissions li, .changelog li {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #e6e6e6;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            animation: slide-up 1.8s ease;
+        }
+
+        .features li:hover, .commands li:hover, .permissions li:hover, .changelog li:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .features li::before, .commands li::before, .permissions li::before {
+            content: '\f06d'; /* Icono de fuego */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #00D4FF;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .changelog li::before {
+            content: '\f0c1'; /* Icono de enlace */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #00D4FF;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .support p, .versions p {
+            color: #b3b3b3;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .support a {
+            color: #00D4FF;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .support a:hover {
+            text-decoration: underline;
+        }
+
+        .dependencies table {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            color: #e6e6e6;
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .dependencies th, .dependencies td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .dependencies th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00D4FF;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .dependencies a {
+            color: #00D4FF;
+            text-decoration: none;
+        }
+
+        .dependencies a:hover {
+            text-decoration: underline;
+        }
+
+        .screenshots {
+            margin: 60px 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .screenshots h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 28px;
+            color: #e6e6e6;
+            margin-bottom: 30px;
+            position: relative;
+            animation: slide-up 2s ease;
+        }
+
+        .screenshots h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: #00D4FF;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .screenshots img {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            object-fit: contain;
+            border: 1px solid #333;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            animation: slide-up 2.2s ease;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .screenshots img:hover {
+            transform: scale(1.05);
+            border-color: #00D4FF;
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .project-details .btn {
             display: inline-block;
-            padding: 14px 35px;
+            padding: 14px 40px;
             border: 2px solid #00D4FF;
             color: #e6e6e6;
             text-decoration: none;
             border-radius: 25px;
             font-weight: 600;
+            font-size: 16px;
             transition: all 0.3s ease;
-            animation: slide-up 1.4s ease;
+            animation: slide-up 2.4s ease;
         }
 
-        .hero .btn:hover {
+        .project-details .btn:hover {
             background: #00D4FF;
             color: #0d0d0d;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
-        }
-
-        /* Projects */
-        .projects {
-            padding: 100px 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .project-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card img {
-            width: 100%;
-            max-width: 220px;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 26px;
-            margin: 20px 0 10px;
-        }
-
-        .project-card p {
-            color: #b3b3b3;
-            font-size: 16px;
-            margin: 15px 0;
-        }
-
-        .project-card .btn {
-            padding: 10px 25px;
-            border: 2px solid #00D4FF;
-            color: #e6e6e6;
-            text-decoration: none;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: #00D4FF;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .project-card:hover img {
-            transform: scale(1.08);
-        }
-
-        .project-card:hover .btn {
-            background: #00D4FF;
-            color: #0d0d0d;
         }
 
         /* Footer */
@@ -327,7 +439,7 @@
         }
 
         .footer-logo {
-            width: 100px; /* Reducido de 150px a 100px */
+            width: 150px;
             margin-bottom: 20px;
             filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
             transition: transform 0.3s ease, filter 0.3s ease;
@@ -393,20 +505,20 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px; /* Reducido de 20px a 15px para ajustar al tamaño más pequeño */
+            gap: 20px;
             margin-top: 20px;
         }
 
         .social-links a {
-            width: 25px; /* Reducido de 35px a 25px */
-            height: 25px; /* Reducido de 35px a 25px */
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #1a1a1a;
             border-radius: 50%;
             color: #e6e6e6;
-            font-size: 14px; /* Reducido de 18px a 14px para proporción */
+            font-size: 20px;
             transition: all 0.3s ease;
         }
 
@@ -509,7 +621,7 @@
             }
 
             .logo {
-                width: 120px; /* Reducido de 150px a 120px para móviles */
+                width: 150px;
             }
 
             .hamburger {
@@ -564,20 +676,46 @@
                 margin-top: 10px;
             }
 
-            .hero {
+            .project-details {
                 padding: 80px 20px;
             }
 
-            .hero h1 {
-                font-size: 48px;
+            .project-details h1 {
+                font-size: 36px;
             }
 
-            .hero p {
-                font-size: 18px;
+            .project-details .description {
+                font-size: 16px;
             }
 
-            .projects {
-                padding: 60px 20px;
+            .discord-callout {
+                padding: 15px;
+            }
+
+            .features h2, .commands h2, .permissions h2, .support h2, .dependencies h2, .versions h2, .changelog h2 {
+                font-size: 24px;
+            }
+
+            .features li, .commands li, .permissions li, .changelog li {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .screenshots h2 {
+                font-size: 24px;
+            }
+
+            .screenshots img {
+                max-width: 100%;
+            }
+
+            .project-details .btn {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+
+            .dependencies table {
+                font-size: 14px;
             }
 
             footer {
@@ -593,13 +731,13 @@
             }
 
             .footer-logo {
-                width: 80px; /* Reducido de 100px a 80px para móviles */
+                width: 120px;
             }
 
             .social-links a {
-                width: 20px; /* Reducido de 25px a 20px para móviles */
-                height: 20px; /* Reducido de 25px a 20px para móviles */
-                font-size: 12px; /* Reducido de 14px a 12px para proporción */
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
             }
         }
     </style>
@@ -607,7 +745,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="/assets/logos/logokfs.jpg" alt="KinglyFenixStudios Logo" class="logo">
+            <img src="https://cdn.modrinth.com/data/cached_images/65860bc243bdd50f7648cc8f60f4d4fcdb264266.jpeg" alt="KinglyBosses Logo" class="logo">
         </div>
         <nav>
             <div class="hamburger">
@@ -617,7 +755,6 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
-                <li><a href="/sobre-nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
                 <li class="dropdown">
                     <a href="#" data-es="Proyectos" data-en="Projects">Proyectos</a>
                     <ul class="dropdown-content">
@@ -628,7 +765,6 @@
                         <li><a href="/celunyx">Celunyx</a></li>
                     </ul>
                 </li>
-                <li><a href="/wiki" data-es="Wiki" data-en="Wiki">Wiki</a></li>
                 <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
             </ul>
             <div class="language-switcher">
@@ -638,60 +774,86 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>KinglyFenixStudios</h1>
-        <p data-es="Desarrollamos plugins innovadores para Minecraft, elevando la experiencia de juego con soluciones creativas y personalizadas." data-en="We develop innovative Minecraft plugins, enhancing the gaming experience with creative and customized solutions."></p>
-        <a href="#projects" class="btn" data-es="Explora nuestros proyectos" data-en="Explore our projects">Explora nuestros proyectos</a>
-    </section>
+    <section class="project-details">
+        <h1>Kofish Abilities</h1>
+        <p class="description" data-es="El complemento de habilidades Kofish está diseñado para HCF Kitmap y otras modalidades, ofreciendo 30 habilidades únicas. Ya sea jugando solo o en equipo, proporciona opciones de personalización intuitivas. Con soporte para PlaceholderAPI (Beta), accede a información en tiempo real como tiempos de espera y nombres de habilidades. El plugin está en sus primeras etapas, pero en constante desarrollo." data-en="The Kofish Abilities plugin is designed for HCF Kitmap and other modes, offering 30 unique skills. Whether playing solo or in a team, it provides intuitive customization options. With PlaceholderAPI (Beta) support, access real-time info like cooldown status and skill names. The plugin is in early stages but under active development."></p>
+        
+        <div class="discord-callout">
+            <p data-es="¡Únete al <a href='https://discord.gg/pfFmQYkcGQ'>Discord</a> para obtener ayuda! Si necesitas asistencia o quieres mantenerte al día con las actualizaciones, nuestro servidor de Discord es el lugar perfecto." data-en="Join the <a href='https://discord.gg/pfFmQYkcGQ'>Discord</a> for assistance! If you need help or want to stay updated with the latest changes, our Discord server is the perfect place."></p>
+        </div>
 
-    <section id="projects" class="projects">
-        <div class="project-card">
-            <img src="/assets/logos/kinglybosses.jpg" alt="KinglyBosses">
-            <h2>KinglyBosses</h2>
-            <p data-es="Crea y gestiona jefes personalizados para tu servidor." data-en="Create and manage custom bosses for your server."></p>
-            <a href="/proyects/kinglybosses.html" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
+        <div class="features">
+            <h2 data-es="Características" data-en="Features"></h2>
+            <ul>
+                <li data-es="30 Habilidades: Incluye 30 habilidades únicas para enriquecer la jugabilidad." data-en="30 Abilities: Features 30 unique abilities to enhance gameplay."></li>
+                <li data-es="Opciones de Personalización: Personaliza habilidades de manera intuitiva para adaptarlas a tu estilo." data-en="Customization Options: Customize abilities intuitively to fit your style."></li>
+                <li data-es="Intuitivo y Fácil de Usar: Diseñado para ser accesible tanto para jugadores como para administradores." data-en="Intuitive and User-Friendly: Designed to be accessible for both players and administrators."></li>
+                <li data-es="Soporte PlaceholderAPI (Beta): Accede a información en tiempo real como estados de enfriamiento." data-en="PlaceholderAPI Support (Beta): Access real-time info like cooldown statuses."></li>
+            </ul>
         </div>
-        <div class="project-card">
-            <img src="/assets/logos/kofish.webp" alt="Kofish">
-            <h2>Kofish</h2>
-            <p data-es="30 habilidades únicas para HCF Kitmap y más." data-en="30 unique skills for HCF Kitmap and more."></p>
-            <a href="/kofish" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
+
+        <div class="commands">
+            <h2 data-es="Comandos" data-en="Commands"></h2>
+            <ul>
+                <li data-es="/ability &lt;jugador&gt; &lt;habilidad&gt; &lt;cantidad&gt;: Otorga a un jugador un objeto de habilidad." data-en="/ability &lt;player&gt; &lt;ability&gt; &lt;amount&gt;: Grant a player an ability item."></li>
+                <li data-es="/ability &lt;jugador&gt; resetcooldown: Reinicia el tiempo de espera de habilidades de un jugador." data-en="/ability &lt;player&gt; resetcooldown: Reset any active ability cooldown for a player."></li>
+                <li data-es="/ability give &lt;jugador&gt;: Abre un menú para proporcionar un objeto de habilidad al jugador." data-en="/ability give &lt;player&gt;: Open a menu to provide the player with an ability item."></li>
+                <li data-es="/ability list: Muestra todos los objetos de habilidad disponibles." data-en="/ability list: Display all available ability items."></li>
+            </ul>
         </div>
-        <div class="project-card">
-            <img src="/assets/logos/chessure.jpg" alt="Chessure">
-            <h2>Chessure</h2>
-            <p data-es="Transforma la experiencia de loot con cofres dinámicos." data-en="Transform the loot experience with dynamic chests."></p>
-            <a href="/chessure" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
+
+        <div class="permissions">
+            <h2 data-es="Permisos" data-en="Permissions"></h2>
+            <ul>
+                <li data-es="Sin permisos específicos definidos aún. Permisos administrativos implícitos para comandos." data-en="No specific permissions defined yet. Administrative permissions implied for commands."></li>
+            </ul>
         </div>
-        <div class="project-card">
-            <img src="/assets/logos/denarius.webp" alt="Denarius">
-            <h2>Denarius</h2>
-            <p data-es="Próximamente." data-en="Coming soon."></p>
-            <a href="/denarius" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
+
+        <div class="support">
+            <h2 data-es="Soporte" data-en="Support"></h2>
+            <p data-es="Únete a nuestra comunidad de <a href='https://discord.gg/pfFmQYkcGQ'>Discord</a> para asistencia y discusiones." data-en="Join our <a href='https://discord.gg/pfFmQYkcGQ'>Discord</a> community for assistance and discussions."></p>
         </div>
-        <div class="project-card">
-            <img src="/assets/logos/celunyx.jpg" alt="Celunyx">
-            <h2>Celunyx</h2>
-            <p data-es="Un servidor de Minecraft tipo network." data-en="A Minecraft network server."></p>
-            <a href="/celunyx" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
+
+        <div class="dependencies">
+            <h2 data-es="Dependencias" data-en="Dependencies"></h2>
+            <table>
+                <tr>
+                    <th data-es="Plugin" data-en="Plugin"></th>
+                    <th data-es="¿Es requerido?" data-en="Is required?"></th>
+                </tr>
+                <tr>
+                    <td><a href="https://hangar.papermc.io/HelpChat/PlaceholderAPI">PlaceholderAPI</a></td>
+                    <td data-es="Opcional" data-en="Optional"></td>
+                </tr>
+            </table>
         </div>
+
+        <div class="versions">
+            <h2 data-es="Versiones" data-en="Versions"></h2>
+            <p data-es="Compatible con las versiones de Minecraft 1.7 - 1.8. Se recomienda usar 1.0-Alpha para versiones anteriores a 1.9." data-en="Compatible with Minecraft versions 1.7 - 1.8. Use 1.0-Alpha for versions prior to 1.9 for optimal performance."></p>
+        </div>
+
+        <div class="changelog">
+            <h2 data-es="Registro de Cambios" data-en="Changelog"></h2>
+            <ul>
+                <li data-es="Versión 1.0-Alpha: Lanzamiento inicial con soporte básico para habilidades." data-en="Version 1.0-Alpha: Initial release with basic ability support."></li>
+                <li data-es="Versión 2.0-RELEASE: Versión estable con 30 habilidades, soporte PlaceholderAPI (Beta) y mejoras generales." data-en="Version 2.0-RELEASE: Stable release with 30 abilities, PlaceholderAPI (Beta) support, and general improvements."></li>
+            </ul>
+        </div>
+
+        <div class="screenshots">
+            <h2 data-es="Capturas de Pantalla" data-en="Screenshots"></h2>
+            <img src="/assets/screenshots/placeholder.jpg" alt="Screenshot">
+        </div>
+
+        <a href="#" class="btn" data-es="Descargar ahora" data-en="Download now">Descargar ahora</a>
     </section>
 
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <img src="/assets/logos/logokfs.png" alt="Logo" class="footer-logo">
+                <img src="/assets/logos/kinglyfenixstudios.png" alt="Logo" class="footer-logo">
                 <p data-es="KinglyFenixStudios - Innovación en plugins y servidores para Minecraft. Creamos experiencias únicas para la comunidad gaming." data-en="KinglyFenixStudios - Innovation in plugins and servers for Minecraft. We create unique experiences for the gaming community."></p>
-            </div>
-            <div class="footer-section">
-                <h3 data-es="Enlaces" data-en="Links"></h3>
-                <ul>
-                    <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
-                    <li><a href="/sobre-nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
-                    <li><a href="/proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
-                    <li><a href="/wiki" data-es="Wiki" data-en="Wiki">Wiki</a></li>
-                    <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
-                </ul>
             </div>
             <div class="footer-section">
                 <h3 data-es="Síguenos" data-en="Follow Us"></h3>
