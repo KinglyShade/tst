@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - KinglyFenixStudios</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color:#e6e6e6;
+        }
+
+        body {
+            background: #0d0d0d;
+            color: #e6e6e6;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, rgba(13, 13, 13, 0.95), rgba(26, 26, 26, 0.95));
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo-container {
+            position: relative;
+        }
+
+        .logo {
+            width: 200px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 10px rgba(0, 212, 255, 0.4));
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: #e6e6e6;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 17px;
+            padding: 8px 15px;
+            transition: color 0.3s ease, background 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .nav-menu a:hover {
+            color: #00D4FF;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: #00D4FF;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 70%;
+            left: 15%;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #1a1a1a;
+            border: 1px solid rgba(51, 51, 51, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 180px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            font-size: 15px;
+            border-radius: 8px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: slide-down 0.3s ease;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hamburger span {
+            width: 32px;
+            height: 3px;
+            background: #e6e6e6;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-switcher button {
+            background: none;
+            border: 1px solid #00D4FF;
+            color: #e6e6e6;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher button.active,
+        .language-switcher button:hover {
+            background: #00D4FF;
+            color: #0d0d0d;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.8), #0d0d0d);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 48px;
+   
+            background: linear-gradient(45deg, #00D4FF, #e6e6e6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            animation: slide-up 1s ease;
+        }
+
+        .about .description {
+            color: #f1efef;
+            font-size: 18px;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            animation: slide-up 1.2s ease;
+        }
+
+        .about .description strong {
+            color: #00D4FF;
+            font-weight: 600;
+        }
+
+        .show-more-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            border: 2px solid #00D4FF;
+            background-color: #0d0d0d;
+            color: #e6e6e6;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        .show-more-btn:hover {
+            background: #00D4FF;
+            color: #0d0d0d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .content-wrapper {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .content-wrapper.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        .values {
+            max-width: 800px;
+            margin: 60px auto;
+        }
+
+        .values h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 28px;
+            color: #e6e6e6;
+            margin: 40px 0 25px;
+            position: relative;
+            animation: slide-up 1.4s ease;
+        }
+
+        .values h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: #00D4FF;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .values ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .values li {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            color: #e6e6e6;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            animation: slide-up 1.6s ease;
+        }
+
+        .values li:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .values li::before {
+            content: '\f06d'; /* Icono de fuego de Font Awesome */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #00D4FF;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to top, #0d0d0d, #1a1a1a);
+            padding: 80px 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section {
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .footer-section:hover .footer-logo {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 10px rgba(0, 212, 255, 0.4));
+        }
+
+        .footer-section p {
+            color: #b3b3b3;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: #e6e6e6;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: #00D4FF;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .footer-section:hover h3::after {
+            width: 60px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #b3b3b3;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-section a:hover {
+            color: #00D4FF;
+            padding-left: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            border-radius: 50%;
+            color: #e6e6e6;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #00D4FF;
+            color: #0d0d0d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 30px 0 20px;
+            border-top: 1px solid rgba(51, 51, 51, 0.5);
+            position: relative;
+            background: rgba(13, 13, 13, 0.8);
+        }
+
+        .footer-bottom p {
+            color: #b3b3b3;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .status {
+            color: #ff4444;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .footer-spark {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, #00D4FF, transparent);
+            border-radius: 50%;
+            animation: footer-float 8s infinite ease-in-out;
+        }
+
+        /* Partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #00D4FF, transparent);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Animaciones */
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        @keyframes footer-float {
+            0% { transform: translateY(100%) scale(0.5); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(0) scale(1); opacity: 0; }
+        }
+
+        @keyframes slide-up {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slide-down {
+            0% { transform: translateY(-15px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                width: 150px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(26, 26, 26, 0.95);
+                padding: 80px 20px 20px;
+                flex-direction: column;
+                gap: 30px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                z-index: 99;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                font-size: 20px;
+                padding: 15px;
+            }
+
+            .dropdown-content {
+                position: relative;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 10px 0;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(7px, 7px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            .language-switcher {
+                margin-top: 10px;
+            }
+
+            .about {
+                padding: 80px 20px;
+            }
+
+            .about h1 {
+                font-size: 36px;
+            }
+
+            .about .description {
+                font-size: 16px;
+            }
+
+            .values h2 {
+                font-size: 24px;
+            }
+
+            .values li {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            footer {
+                padding: 60px 20px 30px;
+            }
+
+            .footer-content {
+                gap: 40px;
+            }
+
+            .footer-section {
+                padding: 15px;
+            }
+
+            .footer-logo {
+                width: 120px;
+            }
+
+            .social-links a {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="/assets/logos/kinglyfenixstudios.png" alt="KinglyFenixStudios Logo" class="logo">
+        </div>
+        <nav>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
+                <li><a href="/sobre-nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
+                <li class="dropdown">
+                    <a href="#" data-es="Proyectos" data-en="Projects">Proyectos</a>
+                    <ul class="dropdown-content">
+                        <li><a href="/kinglybosses">KinglyBosses</a></li>
+                        <li><a href="/kofish">Kofish</a></li>
+                        <li><a href="/chessure">Chessure</a></li>
+                        <li><a href="/denarius">Denarius</a></li>
+                        <li><a href="/celunyx">Celunyx</a></li>
+                    </ul>
+                </li>
+                <li><a href="/wiki" data-es="Wiki" data-en="Wiki">Wiki</a></li>
+                <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button data-lang="es" class="active">ES</button>
+                <button data-lang="en">EN</button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="about">
+        <h1 data-es="Quiénes Somos" data-en="Who We Are">Quiénes Somos</h1>
+        <p class="description" data-es="En <strong>KinglyFenixStudios</strong>, nos apasiona transformar la experiencia de Minecraft a través de la tecnología. Somos un equipo de desarrolladores dedicados a crear plugins y servidores innovadores que potencian la creatividad y la diversión en cada servidor. Desde herramientas para gestionar jefes personalizados hasta sistemas de loot dinámicos, nuestro objetivo es ofrecer soluciones que se adapten a las necesidades de cada comunidad de jugadores." data-en="At <strong>KinglyFenixStudios</strong>, we are passionate about transforming the Minecraft experience through technology. We are a team of developers dedicated to creating innovative plugins and servers that enhance creativity and fun on every server. From tools to manage custom bosses to dynamic loot systems, our goal is to provide solutions that meet the needs of every gaming community."></p>
+        
+        <button class="show-more-btn" data-es="Mostrar más" data-en="Show more">Mostrar más</button>
+
+        <div class="content-wrapper">
+            <p class="description" data-es="Fundados con la visión de renacer como el fénix, combinamos creatividad, tecnología y un enfoque centrado en el usuario para entregar productos de alta calidad. Estamos en constante evolución, trabajando en nuevos proyectos y mejorando los existentes para garantizar experiencias únicas e inolvidables." data-en="Founded with the vision of rising like a phoenix, we combine creativity, technology, and a user-centered approach to deliver high-quality products. We are constantly evolving, working on new projects and improving existing ones to ensure unique and unforgettable experiences."></p>
+            
+            <div class="values">
+                <h2 data-es="Nuestros Valores" data-en="Our Values"></h2>
+                <ul>
+                    <li data-es="Innovación: Siempre buscamos nuevas formas de mejorar la experiencia de juego." data-en="Innovation: We constantly seek new ways to enhance the gaming experience."></li>
+                    <li data-es="Calidad: Cada plugin está diseñado con atención al detalle y optimizado para un rendimiento excepcional." data-en="Quality: Every plugin is designed with attention to detail and optimized for exceptional performance."></li>
+                    <li data-es="Comunidad: Escuchamos a los jugadores y administradores para crear soluciones que realmente importan." data-en="Community: We listen to players and administrators to create solutions that truly matter."></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="/assets/logos/kinglyfenixstudios.png" alt="Logo" class="footer-logo">
+                <p data-es="KinglyFenixStudios - Innovación en plugins y servidores para Minecraft. Creamos experiencias únicas para la comunidad gaming." data-en="KinglyFenixStudios - Innovation in plugins and servers for Minecraft. We create unique experiences for the gaming community."></p>
+            </div>
+
+            <div class="footer-section">
+                <h3 data-es="Síguenos" data-en="Follow Us"></h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://discord.gg/pfFmQYkcGQ" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-es="© 2025 KinglyFenixStudios. Todos los derechos reservados." data-en="© 2025 KinglyFenixStudios. All rights reserved."></p>
+            <p class="status" data-es="Sitio en desarrollo" data-en="Site in development">Sitio en desarrollo</p>
+        </div>
+        <div class="footer-decoration"></div>
+    </footer>
+
+    <div class="particles"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Partículas principales
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 100;
+            for (let i = 0; i < particleCount; i++) {
+                const spark = document.createElement('div');
+                spark.classList.add('spark');
+                spark.style.left = `${Math.random() * 100}vw`;
+                spark.style.animationDelay = `${Math.random() * 5}s`;
+                spark.style.animationDuration = `${4 + Math.random() * 3}s`;
+                particlesContainer.appendChild(spark);
+            }
+
+            // Partículas del footer
+            const footerDecoration = document.querySelector('.footer-decoration');
+            const sparkCount = 20;
+            for (let i = 0; i < sparkCount; i++) {
+                const spark = document.createElement('div');
+                spark.classList.add('footer-spark');
+                spark.style.left = `${Math.random() * 100}%`;
+                spark.style.animationDelay = `${Math.random() * 6}s`;
+                spark.style.animationDuration = `${6 + Math.random() * 4}s`;
+                footerDecoration.appendChild(spark);
+            }
+
+            // Menú hamburguesa
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Cerrar menú al hacer clic en un enlace (móvil)
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+
+            // Cambio de idioma
+            const langButtons = document.querySelectorAll('.language-switcher button');
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+
+            function updateLanguage(lang) {
+                elements.forEach(element => {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                });
+                langButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+                });
+                document.documentElement.lang = lang;
+            }
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const lang = button.getAttribute('data-lang');
+                    updateLanguage(lang);
+                    localStorage.setItem('preferredLang', lang);
+                });
+            });
+
+            // Cargar idioma preferido
+            const savedLang = localStorage.getItem('preferredLang') || 'es';
+            updateLanguage(savedLang);
+
+            // Mostrar/Ocultar contenido
+            const showMoreBtn = document.querySelector('.show-more-btn');
+            const contentWrapper = document.querySelector('.content-wrapper');
+
+            showMoreBtn.addEventListener('click', () => {
+                contentWrapper.classList.toggle('visible');
+                const isVisible = contentWrapper.classList.contains('visible');
+                showMoreBtn.setAttribute('data-es', isVisible ? 'Mostrar menos' : 'Mostrar más');
+                showMoreBtn.setAttribute('data-en', isVisible ? 'Show less' : 'Show more');
+                updateLanguage(savedLang); // Actualizar texto del botón según idioma
+            });
+        });
+    </script>
+</body>
+</html>
