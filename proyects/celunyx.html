@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KinglyBosses - KinglyFenixStudios</title>
+    <title>Celunyx - KinglyFenixStudios</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -14,12 +14,182 @@
         }
 
         body {
-            background: #0d0d0d;
+            background: linear-gradient(135deg, #0a0a1f, #1a1a3d);
             color: #e6e6e6;
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+        }
+
+        /* Fondo Cósmico */
+        .cosmic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat, radial-gradient(circle at 50% 50%, rgba(0, 50, 100, 0.3), rgba(0, 0, 20, 1));
+            z-index: -2;
+            animation: cosmic-shift 60s infinite ease-in-out;
+        }
+
+        @keyframes cosmic-shift {
+            0% { background-position: 0 0; }
+            50% { background-position: 500px 500px; }
+            100% { background-position: 0 0; }
+        }
+
+        /* Pantalla de Carga */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a1f url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .planet-system {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            animation: spin 8s infinite ease-in-out;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00d4ff, #1a1a3d);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .planet:nth-child(1) { width: 60px; height: 60px; top: 70px; left: 70px; }
+        .planet:nth-child(2) { width: 30px; height: 30px; top: 20px; left: 120px; animation: orbit 4s infinite ease-in-out; }
+        .planet:nth-child(3) { width: 20px; height: 20px; top: 140px; left: 40px; animation: orbit 6s infinite ease-in-out reverse; }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes orbit {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.1); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Estrellas Fugaces */
+        .shooting-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, #00d4ff, transparent);
+            border-radius: 50%;
+            animation: shoot 3s infinite ease-in-out;
+            box-shadow: 0 0 5px rgba(0, 212, 255, 0.8);
+        }
+
+        @keyframes shoot {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            50% { transform: translate(150px, 150px) scale(1.5); opacity: 0.8; }
+            100% { transform: translate(300px, 300px) scale(1); opacity: 0; }
+        }
+
+        /* Efecto Hiperespacial */
+        .hyper-space {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .hyper-space.active {
+            opacity: 1;
+        }
+
+        .warp-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            transform-origin: center;
+            animation: warp 1s infinite linear;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes warp {
+            0% { transform: translate(0, 0) scaleX(1); opacity: 0; }
+            20% { transform: translate(0, 0) scaleX(20); opacity: 1; }
+            100% { transform: translate(-500px, -500px) scaleX(50); opacity: 0; }
+        }
+
+        /* Efecto Viaje entre Estrellas */
+        .star-travel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .star-travel.active {
+            opacity: 1;
+        }
+
+        .travel-star {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: linear-gradient(to bottom, #fff, transparent);
+            animation: travel 2s infinite linear;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes travel {
+            0% { transform: translateY(-100vh) scaleY(1); opacity: 0.8; }
+            100% { transform: translateY(100vh) scaleY(5); opacity: 0; }
+        }
+
+        /* Contenido principal (oculto al inicio) */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
         }
 
         /* Header */
@@ -42,7 +212,7 @@
         }
 
         .logo {
-            width: 200px;
+            width: 150px;
             transition: transform 0.3s ease, filter 0.3s ease;
             filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
         }
@@ -171,248 +341,136 @@
             color: #0d0d0d;
         }
 
-        /* Project Details */
-        .project-details {
-            padding: 100px 40px;
+        /* Hero */
+        .hero {
             text-align: center;
-            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.8), #0d0d0d);
+            padding: 120px 40px;
             position: relative;
-            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.8), rgba(10, 10, 31, 0));
         }
 
-        .project-details h1 {
+        .hero h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 48px;
+            font-size: 64px;
             background: linear-gradient(45deg, #00D4FF, #e6e6e6);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 20px;
             animation: slide-up 1s ease;
         }
 
-        .project-details .description {
+        .hero p {
             color: #b3b3b3;
-            font-size: 18px;
-            max-width: 900px;
-            margin: 0 auto 40px;
+            font-size: 22px;
+            max-width: 800px;
+            margin: 25px auto;
             animation: slide-up 1.2s ease;
         }
 
-        .discord-callout {
-            background: rgba(26, 26, 26, 0.8);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 800px;
-            margin: 40px auto;
-            border: 1px solid #00D4FF;
-            animation: slide-up 1.4s ease;
-        }
-
-        .discord-callout p {
-            color: #e6e6e6;
-            font-size: 16px;
-        }
-
-        .discord-callout a {
-            color: #00D4FF;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .discord-callout a:hover {
-            text-decoration: underline;
-        }
-
-        .features, .commands, .permissions, .support, .dependencies, .versions, .changelog {
-            max-width: 1000px;
-            margin: 60px auto;
-        }
-
-        .features h2, .commands h2, .permissions h2, .support h2, .dependencies h2, .versions h2, .changelog h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 28px;
-            color: #e6e6e6;
-            margin: 40px 0 25px;
-            position: relative;
-            animation: slide-up 1.6s ease;
-        }
-
-        .features h2::after, .commands h2::after, .permissions h2::after, .support h2::after, .dependencies h2::after, .versions h2::after, .changelog h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 2px;
-            background: #00D4FF;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .features ul, .commands ul, .permissions ul, .changelog ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .features li, .commands li, .permissions li, .changelog li {
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-            color: #e6e6e6;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(26, 26, 26, 0.5);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            animation: slide-up 1.8s ease;
-        }
-
-        .features li:hover, .commands li:hover, .permissions li:hover, .changelog li:hover {
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .features li::before, .commands li::before, .permissions li::before {
-            content: '\f06d'; /* Icono de fuego */
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            color: #00D4FF;
-            margin-right: 15px;
-            font-size: 20px;
-        }
-
-        .changelog li::before {
-            content: '\f0c1'; /* Icono de enlace */
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            color: #00D4FF;
-            margin-right: 15px;
-            font-size: 20px;
-        }
-
-        .support p, .versions p {
-            color: #b3b3b3;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .support a {
-            color: #00D4FF;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .support a:hover {
-            text-decoration: underline;
-        }
-
-        .dependencies table {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            border-collapse: collapse;
-            color: #e6e6e6;
-            background: rgba(26, 26, 26, 0.5);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .dependencies th, .dependencies td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #333;
-        }
-
-        .dependencies th {
-            background: rgba(0, 212, 255, 0.1);
-            color: #00D4FF;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-        }
-
-        .dependencies a {
-            color: #00D4FF;
-            text-decoration: none;
-        }
-
-        .dependencies a:hover {
-            text-decoration: underline;
-        }
-
-        .screenshots {
-            margin: 60px 0;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .screenshots h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 28px;
-            color: #e6e6e6;
-            margin-bottom: 30px;
-            position: relative;
-            animation: slide-up 2s ease;
-        }
-
-        .screenshots h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 2px;
-            background: #00D4FF;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .screenshots img {
-            width: 100%;
-            max-width: 700px;
-            height: auto;
-            object-fit: contain;
-            border: 1px solid #333;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            animation: slide-up 2.2s ease;
-            margin: 20px auto;
-            display: block;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .screenshots img:hover {
-            transform: scale(1.05);
-            border-color: #00D4FF;
-            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
-        }
-
-        .project-details .btn {
+        .hero .btn {
             display: inline-block;
-            padding: 14px 40px;
+            padding: 14px 35px;
             border: 2px solid #00D4FF;
             color: #e6e6e6;
             text-decoration: none;
             border-radius: 25px;
             font-weight: 600;
-            font-size: 16px;
             transition: all 0.3s ease;
-            animation: slide-up 2.4s ease;
+            animation: slide-up 1.4s ease;
         }
 
-        .project-details .btn:hover {
+        .hero .btn:hover {
             background: #00D4FF;
             color: #0d0d0d;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
         }
 
+        /* Projects */
+        .projects {
+            padding: 100px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(26, 26, 61, 0.8);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card img {
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 26px;
+            margin: 20px 0 10px;
+        }
+
+        .project-card p {
+            color: #b3b3b3;
+            font-size: 16px;
+            margin: 15px 0;
+        }
+
+        .project-card .btn {
+            padding: 10px 25px;
+            border: 2px solid #00D4FF;
+            color: #e6e6e6;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #00D4FF;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .project-card:hover .btn {
+            background: #00D4FF;
+            color: #0d0d0d;
+        }
+
         /* Footer */
         footer {
-            background: linear-gradient(to top, #0d0d0d, #1a1a1a);
+            background: linear-gradient(to top, rgba(10, 10, 31, 1), rgba(26, 26, 61, 0.8));
             padding: 80px 40px 40px;
             position: relative;
             overflow: hidden;
@@ -439,7 +497,7 @@
         }
 
         .footer-logo {
-            width: 150px;
+            width: 100px;
             margin-bottom: 20px;
             filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
             transition: transform 0.3s ease, filter 0.3s ease;
@@ -505,20 +563,20 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin-top: 20px;
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
+            width: 25px;
+            height: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #1a1a1a;
+            background: rgba(26, 26, 61, 0.8);
             border-radius: 50%;
             color: #e6e6e6;
-            font-size: 20px;
+            font-size: 14px;
             transition: all 0.3s ease;
         }
 
@@ -570,33 +628,6 @@
             animation: footer-float 8s infinite ease-in-out;
         }
 
-        /* Partículas */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .spark {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #00D4FF, transparent);
-            border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
-        }
-
-        /* Animaciones */
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
-        }
-
         @keyframes footer-float {
             0% { transform: translateY(100%) scale(0.5); opacity: 0; }
             50% { opacity: 0.6; }
@@ -621,7 +652,7 @@
             }
 
             .logo {
-                width: 150px;
+                width: 120px;
             }
 
             .hamburger {
@@ -676,46 +707,20 @@
                 margin-top: 10px;
             }
 
-            .project-details {
+            .hero {
                 padding: 80px 20px;
             }
 
-            .project-details h1 {
-                font-size: 36px;
+            .hero h1 {
+                font-size: 48px;
             }
 
-            .project-details .description {
-                font-size: 16px;
+            .hero p {
+                font-size: 18px;
             }
 
-            .discord-callout {
-                padding: 15px;
-            }
-
-            .features h2, .commands h2, .permissions h2, .support h2, .dependencies h2, .versions h2, .changelog h2 {
-                font-size: 24px;
-            }
-
-            .features li, .commands li, .permissions li, .changelog li {
-                font-size: 14px;
-                padding: 10px;
-            }
-
-            .screenshots h2 {
-                font-size: 24px;
-            }
-
-            .screenshots img {
-                max-width: 100%;
-            }
-
-            .project-details .btn {
-                padding: 12px 30px;
-                font-size: 14px;
-            }
-
-            .dependencies table {
-                font-size: 14px;
+            .projects {
+                padding: 60px 20px;
             }
 
             footer {
@@ -731,76 +736,184 @@
             }
 
             .footer-logo {
-                width: 120px;
+                width: 80px;
             }
 
             .social-links a {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="https://cdn.modrinth.com/data/cached_images/65860bc243bdd50f7648cc8f60f4d4fcdb264266.jpeg" alt="KinglyBosses Logo" class="logo">
+    <!-- Pantalla de Carga -->
+    <div class="loader">
+        <div class="planet-system">
+            <div class="planet"></div>
+            <div class="planet"></div>
+            <div class="planet"></div>
         </div>
-        <nav>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
-                <li class="dropdown">
-                    <a href="#" data-es="Proyectos" data-en="Projects">Proyectos</a>
-                    <ul class="dropdown-content">
-                        <li><a href="/kinglybosses">KinglyBosses</a></li>
-                        <li><a href="/kofish">Kofish</a></li>
-                        <li><a href="/chessure">Chessure</a></li>
-                        <li><a href="/denarius">Denarius</a></li>
-                        <li><a href="/celunyx">Celunyx</a></li>
-                    </ul>
-                </li>
-                <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
-            </ul>
-            <div class="language-switcher">
-                <button data-lang="es" class="active">ES</button>
-                <button data-lang="en">EN</button>
-            </div>
-        </nav>
-    </header>
+    </div>
 
-    <div class="particles"></div>
+    <!-- Fondo Cósmico y Estrellas Fugaces -->
+    <div class="cosmic-background"></div>
+    <div class="shooting-stars">
+        <div class="star" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="star" style="top: 30%; left: 50%; animation-delay: 1s;"></div>
+        <div class="star" style="top: 70%; left: 80%; animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Efecto Hiperespacial -->
+    <div class="hyper-space" id="hyperSpace"></div>
+
+    <!-- Efecto Viaje entre Estrellas -->
+    <div class="star-travel" id="starTravel"></div>
+
+    <!-- Contenido Principal -->
+    <div class="main-content" id="mainContent">
+        <header>
+            <div class="logo-container">
+                <img src="/assets/logos/logokfs.jpg" alt="KinglyFenixStudios Logo" class="logo">
+            </div>
+            <nav>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
+                    <li><a href="/sobre-nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
+                    <li class="dropdown">
+                        <a href="#" data-es="Proyectos" data-en="Projects">Proyectos</a>
+                        <ul class="dropdown-content">
+                            <li><a href="/kinglybosses">KinglyBosses</a></li>
+                            <li><a href="/kofish">Kofish</a></li>
+                            <li><a href="/chessure">Chessure</a></li>
+                            <li><a href="/denarius">Denarius</a></li>
+                            <li><a href="/celunyx">Celunyx</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/wiki" data-es="Wiki" data-en="Wiki">Wiki</a></li>
+                    <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button data-lang="es" class="active">ES</button>
+                    <button data-lang="en">EN</button>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Celunyx</h1>
+            <p data-es="Una network de Minecraft única con una ambientación inmersiva en el espacio, ofreciendo exploración y aventuras intergalácticas." data-en="A unique Minecraft network with an immersive space theme, offering exploration and intergalactic adventures."></p>
+            <a href="#projects" class="btn" data-es="Descubre más" data-en="Discover more">Descubre más</a>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="project-card">
+                <img src="/assets/logos/celunyx.jpg" alt="Celunyx Survival Único">
+                <h2 data-es="Survival Único" data-en="Unique Survival"></h2>
+                <p data-es="Explora planetas con biomas únicos, construye bases espaciales y enfréntate a peligros cósmicos." data-en="Explore planets with unique biomes, build space bases, and face cosmic dangers."></p>
+                <a href="#survival-unico" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
+            </div>
+            <div class="project-card">
+                <img src="/assets/logos/celunyx.jpg" alt="Celunyx Survival RPG">
+                <h2 data-es="Survival RPG" data-en="Survival RPG"></h2>
+                <p data-es="Vive una aventura RPG espacial con misiones épicas y clases únicas en un universo narrativo." data-en="Experience a space RPG adventure with epic quests and unique classes in a narrative universe."></p>
+                <a href="#survival-rpg" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="/assets/logos/logokfs.png" alt="Logo" class="footer-logo">
+                    <p data-es="KinglyFenixStudios - Innovación en plugins y servidores para Minecraft. Creamos experiencias únicas para la comunidad gaming." data-en="KinglyFenixStudios - Innovation in plugins and servers for Minecraft. We create unique experiences for the gaming community."></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-es="Enlaces" data-en="Links"></h3>
+                    <ul>
+                        <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
+                        <li><a href="/sobre-nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
+                        <li><a href="/proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
+                        <li><a href="/wiki" data-es="Wiki" data-en="Wiki">Wiki</a></li>
+                        <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-es="Síguenos" data-en="Follow Us"></h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://discord.gg/pfFmQYkcGQ" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-es="© 2025 KinglyFenixStudios. Todos los derechos reservados." data-en="© 2025 KinglyFenixStudios. All rights reserved."></p>
+                <p class="status" data-es="Sitio en desarrollo" data-en="Site in development">Sitio en desarrollo</p>
+            </div>
+            <div class="footer-decoration">
+                <div class="footer-spark" style="left: 20%; animation-delay: 0s;"></div>
+                <div class="footer-spark" style="left: 50%; animation-delay: 2s;"></div>
+                <div class="footer-spark" style="left: 80%; animation-delay: 4s;"></div>
+            </div>
+        </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Partículas principales
-            const particlesContainer = document.querySelector('.particles');
-            const particleCount = 60;
-            for (let i = 0; i < particleCount; i++) {
-                const spark = document.createElement('div');
-                spark.classList.add('spark');
-                spark.style.left = `${Math.random() * 100}vw`;
-                spark.style.animationDelay = `${Math.random() * 5}s`;
-                spark.style.animationDuration = `${4 + Math.random() * 3}s`;
-                particlesContainer.appendChild(spark);
-            }
+            const loader = document.querySelector('.loader');
+            const hyperSpace = document.getElementById('hyperSpace');
+            const starTravel = document.getElementById('starTravel');
+            const mainContent = document.getElementById('mainContent');
+            const shootingStars = document.querySelector('.shooting-stars');
 
-            // Partículas del footer
-            const footerDecoration = document.querySelector('.footer-decoration');
-            const sparkCount = 20;
-            for (let i = 0; i < sparkCount; i++) {
-                const spark = document.createElement('div');
-                spark.classList.add('footer-spark');
-                spark.style.left = `${Math.random() * 100}%`;
-                spark.style.animationDelay = `${Math.random() * 6}s`;
-                spark.style.animationDuration = `${6 + Math.random() * 4}s`;
-                footerDecoration.appendChild(spark);
-            }
+            // Ocultar pantalla de carga después de 3 segundos
+            setTimeout(() => {
+                loader.classList.add('hidden');
+
+                // Salto hiperespacial después de 5 segundos
+                setTimeout(() => {
+                    shootingStars.style.opacity = '0';
+                    hyperSpace.innerHTML = '';
+                    hyperSpace.classList.add('active');
+
+                    for (let i = 0; i < 50; i++) {
+                        const warpStar = document.createElement('div');
+                        warpStar.classList.add('warp-star');
+                        warpStar.style.top = `${Math.random() * 100}%`;
+                        warpStar.style.left = `${Math.random() * 100}%`;
+                        warpStar.style.animationDelay = `${Math.random() * 0.5}s`;
+                        hyperSpace.appendChild(warpStar);
+                    }
+
+                    // Terminar salto hiperespacial y comenzar viaje entre estrellas después de 3 segundos
+                    setTimeout(() => {
+                        hyperSpace.classList.remove('active');
+                        starTravel.innerHTML = '';
+                        starTravel.classList.add('active');
+
+                        for (let i = 0; i < 30; i++) {
+                            const travelStar = document.createElement('div');
+                            travelStar.classList.add('travel-star');
+                            travelStar.style.left = `${Math.random() * 100}%`;
+                            travelStar.style.animationDelay = `${Math.random() * 1}s`;
+                            starTravel.appendChild(travelStar);
+                        }
+
+                        // Terminar viaje entre estrellas y mostrar contenido después de 4 segundos
+                        setTimeout(() => {
+                            starTravel.classList.remove('active');
+                            shootingStars.style.opacity = '1';
+                            mainContent.classList.add('visible');
+                        }, 4000);
+                    }, 3000);
+                }, 5000);
+            }, 3000);
 
             // Menú hamburguesa
             const hamburger = document.querySelector('.hamburger');
@@ -810,7 +923,6 @@
                 navMenu.classList.toggle('active');
             });
 
-            // Cerrar menú al hacer clic en un enlace (móvil)
             document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.addEventListener('click', () => {
                     if (window.innerWidth <= 768) {
@@ -842,7 +954,6 @@
                 });
             });
 
-            // Cargar idioma preferido
             const savedLang = localStorage.getItem('preferredLang') || 'es';
             updateLanguage(savedLang);
         });
