@@ -22,7 +22,7 @@
             position: relative;
         }
 
-        /* Header mejorado */
+        /* Header */
         header {
             background: linear-gradient(to right, rgba(13, 13, 13, 0.95), rgba(26, 26, 26, 0.95));
             padding: 20px 60px;
@@ -42,7 +42,7 @@
         }
 
         .logo {
-            width: 200px;
+            width: 50px; /* Reducido de 200px a 150px */
             transition: transform 0.3s ease, filter 0.3s ease;
             filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
         }
@@ -55,7 +55,7 @@
         nav {
             display: flex;
             align-items: center;
-            position: relative;
+            gap: 20px;
         }
 
         .nav-menu {
@@ -147,6 +147,28 @@
             background: #e6e6e6;
             border-radius: 3px;
             transition: all 0.3s ease;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-switcher button {
+            background: none;
+            border: 1px solid #00D4FF;
+            color: #e6e6e6;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher button.active,
+        .language-switcher button:hover {
+            background: #00D4FF;
+            color: #0d0d0d;
         }
 
         /* Hero */
@@ -305,7 +327,7 @@
         }
 
         .footer-logo {
-            width: 150px;
+            width: 100px; /* Reducido de 150px a 100px */
             margin-bottom: 20px;
             filter: drop-shadow(0 2px 5px rgba(0, 212, 255, 0.2));
             transition: transform 0.3s ease, filter 0.3s ease;
@@ -371,20 +393,20 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px; /* Reducido de 20px a 15px para ajustar al tamaño más pequeño */
             margin-top: 20px;
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
+            width: 25px; /* Reducido de 35px a 25px */
+            height: 25px; /* Reducido de 35px a 25px */
             display: flex;
             align-items: center;
             justify-content: center;
             background: #1a1a1a;
             border-radius: 50%;
             color: #e6e6e6;
-            font-size: 20px;
+            font-size: 14px; /* Reducido de 18px a 14px para proporción */
             transition: all 0.3s ease;
         }
 
@@ -487,7 +509,7 @@
             }
 
             .logo {
-                width: 150px;
+                width: 120px; /* Reducido de 150px a 120px para móviles */
             }
 
             .hamburger {
@@ -538,6 +560,10 @@
                 transform: rotate(-45deg) translate(7px, -7px);
             }
 
+            .language-switcher {
+                margin-top: 10px;
+            }
+
             .hero {
                 padding: 80px 20px;
             }
@@ -567,13 +593,13 @@
             }
 
             .footer-logo {
-                width: 120px;
+                width: 80px; /* Reducido de 100px a 80px para móviles */
             }
 
             .social-links a {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
+                width: 20px; /* Reducido de 25px a 20px para móviles */
+                height: 20px; /* Reducido de 25px a 20px para móviles */
+                font-size: 12px; /* Reducido de 14px a 12px para proporción */
             }
         }
     </style>
@@ -590,10 +616,10 @@
                 <span></span>
             </div>
             <ul class="nav-menu">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+                <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
+                <li><a href="/sobre-nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
                 <li class="dropdown">
-                    <a href="#">Proyectos</a>
+                    <a href="#" data-es="Proyectos" data-en="Projects">Proyectos</a>
                     <ul class="dropdown-content">
                         <li><a href="/kinglybosses">KinglyBosses</a></li>
                         <li><a href="/kofish">Kofish</a></li>
@@ -602,47 +628,52 @@
                         <li><a href="/celunyx">Celunyx</a></li>
                     </ul>
                 </li>
-                <li><a href="/contacto">Contacto</a></li>
+                <li><a href="/wiki" data-es="Wiki" data-en="Wiki">Wiki</a></li>
+                <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
             </ul>
+            <div class="language-switcher">
+                <button data-lang="es" class="active">ES</button>
+                <button data-lang="en">EN</button>
+            </div>
         </nav>
     </header>
 
     <section class="hero">
         <h1>KinglyFenixStudios</h1>
-        <p>Desarrollamos plugins innovadores para Minecraft, elevando la experiencia de juego con soluciones creativas y personalizadas.</p>
-        <a href="#projects" class="btn">Explora nuestros proyectos</a>
+        <p data-es="Desarrollamos plugins innovadores para Minecraft, elevando la experiencia de juego con soluciones creativas y personalizadas." data-en="We develop innovative Minecraft plugins, enhancing the gaming experience with creative and customized solutions."></p>
+        <a href="#projects" class="btn" data-es="Explora nuestros proyectos" data-en="Explore our projects">Explora nuestros proyectos</a>
     </section>
 
     <section id="projects" class="projects">
         <div class="project-card">
             <img src="/assets/logos/kinglybosses.jpg" alt="KinglyBosses">
             <h2>KinglyBosses</h2>
-            <p>Crea y gestiona jefes personalizados para tu servidor.</p>
-            <a href="/kinglybosses" class="btn">Ver más</a>
+            <p data-es="Crea y gestiona jefes personalizados para tu servidor." data-en="Create and manage custom bosses for your server."></p>
+            <a href="/kinglybosses" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
         </div>
         <div class="project-card">
             <img src="/assets/logos/kofish.webp" alt="Kofish">
             <h2>Kofish</h2>
-            <p>30 habilidades únicas para HCF Kitmap y más.</p>
-            <a href="/kofish" class="btn">Ver más</a>
+            <p data-es="30 habilidades únicas para HCF Kitmap y más." data-en="30 unique skills for HCF Kitmap and more."></p>
+            <a href="/kofish" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
         </div>
         <div class="project-card">
             <img src="/assets/logos/chessure.jpg" alt="Chessure">
             <h2>Chessure</h2>
-            <p>Transforma la experiencia de loot con cofres dinámicos.</p>
-            <a href="/chessure" class="btn">Ver más</a>
+            <p data-es="Transforma la experiencia de loot con cofres dinámicos." data-en="Transform the loot experience with dynamic chests."></p>
+            <a href="/chessure" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
         </div>
         <div class="project-card">
             <img src="/assets/logos/denarius.webp" alt="Denarius">
             <h2>Denarius</h2>
-            <p>Próximamente.</p>
-            <a href="/denarius" class="btn">Ver más</a>
+            <p data-es="Próximamente." data-en="Coming soon."></p>
+            <a href="/denarius" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
         </div>
         <div class="project-card">
             <img src="/assets/logos/celunyx.jpg" alt="Celunyx">
             <h2>Celunyx</h2>
-            <p>Un servidor de Minecraft tipo network.</p>
-            <a href="/celunyx" class="btn">Ver más</a>
+            <p data-es="Un servidor de Minecraft tipo network." data-en="A Minecraft network server."></p>
+            <a href="/celunyx" class="btn" data-es="Ver más" data-en="Learn more">Ver más</a>
         </div>
     </section>
 
@@ -650,29 +681,30 @@
         <div class="footer-content">
             <div class="footer-section">
                 <img src="/assets/logos/logokfs.png" alt="Logo" class="footer-logo">
-                <p>KinglyFenixStudios - Innovación en plugins y servidores para Minecraft. Creamos experiencias únicas para la comunidad gaming.</p>
+                <p data-es="KinglyFenixStudios - Innovación en plugins y servidores para Minecraft. Creamos experiencias únicas para la comunidad gaming." data-en="KinglyFenixStudios - Innovation in plugins and servers for Minecraft. We create unique experiences for the gaming community."></p>
             </div>
             <div class="footer-section">
-                <h3>Enlaces</h3>
+                <h3 data-es="Enlaces" data-en="Links"></h3>
                 <ul>
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
-                    <li><a href="/proyectos">Proyectos</a></li>
-                    <li><a href="/contacto">Contacto</a></li>
+                    <li><a href="/" data-es="Inicio" data-en="Home">Inicio</a></li>
+                    <li><a href="/sobre-nosotros" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</a></li>
+                    <li><a href="/proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
+                    <li><a href="/wiki" data-es="Wiki" data-en="Wiki">Wiki</a></li>
+                    <li><a href="/contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Síguenos</h3>
+                <h3 data-es="Síguenos" data-en="Follow Us"></h3>
                 <div class="social-links">
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://discord.gg/pfFmQYkcGQ" aria-label="Discord"><i class="fab fa-discord"></i></a>
                     <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 KinglyFenixStudios. Todos los derechos reservados.</p>
-            <p class="status">Sitio en desarrollo</p>
+            <p data-es="© 2025 KinglyFenixStudios. Todos los derechos reservados." data-en="© 2025 KinglyFenixStudios. All rights reserved."></p>
+            <p class="status" data-es="Sitio en desarrollo" data-en="Site in development">Sitio en desarrollo</p>
         </div>
         <div class="footer-decoration"></div>
     </footer>
@@ -722,6 +754,32 @@
                     }
                 });
             });
+
+            // Cambio de idioma
+            const langButtons = document.querySelectorAll('.language-switcher button');
+            const elements = document.querySelectorAll('[data-es], [data-en]');
+
+            function updateLanguage(lang) {
+                elements.forEach(element => {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                });
+                langButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+                });
+                document.documentElement.lang = lang;
+            }
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const lang = button.getAttribute('data-lang');
+                    updateLanguage(lang);
+                    localStorage.setItem('preferredLang', lang);
+                });
+            });
+
+            // Cargar idioma preferido
+            const savedLang = localStorage.getItem('preferredLang') || 'es';
+            updateLanguage(savedLang);
         });
     </script>
 </body>
