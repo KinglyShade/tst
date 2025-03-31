@@ -340,29 +340,76 @@ h2::after {
         <h2><span lang="en">Quick Start Guide</span><span lang="es">Guía Rápida</span></h2>
         <div class="step-by-step">
             <div class="step">
-                <h3><span lang="en">1. Basic Configuration</span><span lang="es">1. Configuración Básica</span></h3>
-                <p lang="en">Start by setting up your boss basics in boss.yml</p>
-                <p lang="es">Comienza configurando los aspectos básicos en boss.yml</p>
+                <h3><span lang="en">1. Install and Configure the Plugin</span><span lang="es">1. Instalar y Configurar el Plugin</span></h3>
+                <p lang="en">Install KinglyBosses and set up basic settings in config.yml.</p>
+                <p lang="es">Instala KinglyBosses y configura los ajustes básicos en config.yml.</p>
+                <div class="code-example">
+                    <pre>settings:
+language: "en_us"
+check-for-updates: true
+general:
+spawnRandom: true
+spawnInterval: 300</pre>
+                </div>
+                <p lang="en"><strong>Tip:</strong> Adjust language and spawn settings to suit your server. See <a href="#" onclick="showSection('main-config')">Main Configuration</a> for details.</p>
+                <p lang="es"><strong>Consejo:</strong> Ajusta el idioma y los ajustes de aparición según tu servidor. Consulta <a href="#" onclick="showSection('main-config')">Configuración Principal</a> para más detalles.</p>
+            </div>
+
+            <div class="step">
+                <h3><span lang="en">2. Create a Simple Boss</span><span lang="es">2. Crear un Jefe Simple</span></h3>
+                <p lang="en">Define a basic boss in boss.yml with health and an attack.</p>
+                <p lang="es">Define un jefe básico en boss.yml con salud y un ataque.</p>
                 <div class="code-example">
                     <pre>bosses:
 my_first_boss:
 boss-id: "001"
 enabled: true
 health: 500
-attack-damage: 20</pre>
+attacks:
+  - attack: "fire_breath"</pre>
                 </div>
+                <p lang="en"><strong>Tip:</strong> Link attacks from attacks.yml. See <a href="#" onclick="showSection('boss-creation')">Boss Creation</a> for more options.</p>
+                <p lang="es"><strong>Consejo:</strong> Vincula ataques desde attacks.yml. Consulta <a href="#" onclick="showSection('boss-creation')">Creación de Jefes</a> para más opciones.</p>
             </div>
+
             <div class="step">
-                <h3><span lang="en">2. Add Attacks</span><span lang="es">2. Añadir Ataques</span></h3>
-                <p lang="en">Define attacks in attacks.yml</p>
-                <p lang="es">Define ataques en attacks.yml</p>
+                <h3><span lang="en">3. Add an Attack</span><span lang="es">3. Añadir un Ataque</span></h3>
+                <p lang="en">Define a simple attack in attacks.yml for your boss.</p>
+                <p lang="es">Define un ataque simple en attacks.yml para tu jefe.</p>
                 <div class="code-example">
                     <pre>attacks:
 fire_breath:
-type: magical
+name: "Fire Breath"
+type: "magical"
 damage: 40
-effect_id: 12</pre>
+probability: 0.4
+cooldown: 8</pre>
                 </div>
+                <p lang="en"><strong>Tip:</strong> Customize damage and effects. See <a href="#" onclick="showSection('attacks-config')">Attacks</a> for advanced mechanics.</p>
+                <p lang="es"><strong>Consejo:</strong> Personaliza daño y efectos. Consulta <a href="#" onclick="showSection('attacks-config')">Ataques</a> para mecánicas avanzadas.</p>
+            </div>
+
+            <div class="step">
+                <h3><span lang="en">4. Add Rewards (Optional)</span><span lang="es">4. Añadir Recompensas (Opcional)</span></h3>
+                <p lang="en">Set up a basic item and group in items.yml and itemgroups.yml.</p>
+                <p lang="es">Configura un ítem básico y un grupo en items.yml y itemgroups.yml.</p>
+                <div class="code-example">
+                    <pre># items.yml
+items:
+item_1650972105000:
+type: "DIAMOND_SWORD"
+name: "Boss Slayer"
+
+# itemgroups.yml
+itemgroups:
+grupo1:
+rolls: 1
+items:
+  - item: "item_1650972105000"
+    probability: 70</pre>
+                </div>
+                <p lang="en"><strong>Tip:</strong> Link rewards to your boss in boss.yml. See <a href="#" onclick="showSection('items-config')">Items</a> and <a href="#" onclick="showSection('item-groups-config')">Item Groups</a>.</p>
+                <p lang="es"><strong>Consejo:</strong> Vincula recompensas a tu jefe en boss.yml. Consulta <a href="#" onclick="showSection('items-config')">Objetos</a> y <a href="#" onclick="showSection('item-groups-config')">Grupos de Objetos</a>.</p>
             </div>
         </div>
     </section>
