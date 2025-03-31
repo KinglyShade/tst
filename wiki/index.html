@@ -246,7 +246,8 @@
     <button class="language-toggle" onclick="toggleLanguage()">EN/ES</button>
 
   <!-- Sidebar -->
-  <nav class="sidebar">
+
+<nav class="sidebar">
     <h2>Wiki Sections</h2>
     <ul>
         <li onclick="showSection('quick-start')"><span lang="en">Quick Start</span><span lang="es">Inicio Rápido</span></li>
@@ -254,6 +255,7 @@
         <li onclick="showSection('boss-creation')"><span lang="en">Boss Creation</span><span lang="es">Creación de Jefes</span></li>
         <li onclick="showSection('structures-config')"><span lang="en">Structures</span><span lang="es">Estructuras</span></li>
         <li onclick="showSection('items-config')"><span lang="en">Items</span><span lang="es">Objetos</span></li>
+        <li onclick="showSection('item-groups-config')"><span lang="en">Item Groups</span><span lang="es">Grupos de Objetos</span></li>
         <li onclick="showSection('attacks-config')"><span lang="en">Attacks</span><span lang="es">Ataques</span></li>
         <li onclick="showSection('particles-config')"><span lang="en">Particles</span><span lang="es">Partículas</span></li>
         <li onclick="showSection('groups-config')"><span lang="en">Groups</span><span lang="es">Grupos</span></li>
@@ -293,263 +295,813 @@ effect_id: 12</pre>
             </div>
         </div>
     </section>
+<!-- Items Configuration Section (unchanged from previous response for items.yml) -->
+<section id="items-config" class="section" style="display:none;">
+    <h2><span lang="en">Items Configuration</span><span lang="es">Configuración de Objetos</span></h2>
+    <p lang="en">This section explains how to configure individual items in items.yml, which can be used as boss rewards, equipment, or other purposes, with custom properties and enchantments.</p>
+    <p lang="es">Esta sección explica cómo configurar objetos individuales en items.yml, que pueden usarse como recompensas de jefes, equipamiento u otros fines, con propiedades y encantamientos personalizados.</p>
+    <div class="step-by-step">
+        <div class="step">
+            <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+            <p lang="en">Items are defined under the 'items' key with a unique identifier, often a timestamp.</p>
+            <p lang="es">Los objetos se definen bajo la clave 'items' con un identificador único, a menudo un timestamp.</p>
+            <div class="code-example">
+                <pre>items:
+item_1650972105000:
+# Item settings go here</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong> The <code>items</code> key is the root for all item definitions. Each item (e.g., <code>item_1650972105000</code>) uses a unique identifier, typically a timestamp, to avoid conflicts and track items easily.</p>
+            <p lang="es"><strong>Explicación:</strong> La clave <code>items</code> es la raíz de todas las definiciones de objetos. Cada objeto (por ejemplo, <code>item_1650972105000</code>) usa un identificador único, típicamente un timestamp, para evitar conflictos y rastrear ítems fácilmente.</p>
+        </div>
+        <div class="step">
+            <h3><span lang="en">2. Core Item Settings</span><span lang="es">2. Configuraciones Básicas de Objetos</span></h3>
+            <p lang="en">Define the item’s type, name, enchantments, and lore.</p>
+            <p lang="es">Define el tipo, nombre, encantamientos y lore del objeto.</p>
+            <div class="code-example">
+                <pre>item_1650972105000:
+type: "DIAMOND_SWORD"
+name: "Espada de Diamante"
+enchanted_effect: false
+enchanted: true
+lore:
+- "Un ítem muy poderoso."
+- "Desata tu verdadero potencial."
+enchants:
+DAMAGE_ALL: 5
+DURABILITY: 3</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>type: "DIAMOND_SWORD"</code>: Minecraft item type (e.g., DIAMOND_SWORD, BOW, SHIELD).</li>
+                    <li><code>name: "Espada de Diamante"</code>: Custom display name, supports color codes.</li>
+                    <li><code>enchanted_effect: false</code>: If true, shows enchantment glow even without enchants; false hides it unless enchanted.</li>
+                    <li><code>enchanted: true</code>: Indicates the item has enchantments.</li>
+                    <li><code>lore</code>: List of descriptive lines shown in the item tooltip.</li>
+                    <li><code>enchants</code>: Enchantments with levels (e.g., <code>DAMAGE_ALL: 5</code> is Sharpness V, <code>DURABILITY: 3</code> is Unbreaking III).</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>type: "DIAMOND_SWORD"</code>: Tipo de ítem de Minecraft (por ejemplo, DIAMOND_SWORD, BOW, SHIELD).</li>
+                    <li><code>name: "Espada de Diamante"</code>: Nombre personalizado, soporta códigos de color.</li>
+                    <li><code>enchanted_effect: false</code>: Si es true, muestra el brillo de encantamiento incluso sin encantamientos; false lo oculta a menos que esté encantado.</li>
+                    <li><code>enchanted: true</code>: Indica que el ítem tiene encantamientos.</li>
+                    <li><code>lore</code>: Lista de líneas descriptivas mostradas en la descripción del ítem.</li>
+                    <li><code>enchants</code>: Encantamientos con niveles (por ejemplo, <code>DAMAGE_ALL: 5</code> es Sharpness V, <code>DURABILITY: 3</code> es Unbreaking III).</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    <div class="config-block">
+        <button class="collapsible"><span lang="en">▸ Example Items</span><span lang="es">▸ Ejemplos de Objetos</span></button>
+        <div class="content">
+            <p lang="en">Complete examples of custom items with different properties.</p>
+            <p lang="es">Ejemplos completos de objetos personalizados con diferentes propiedades.</p>
+            <div class="code-example">
+                <pre># Epic Bow
+item_1650972106000:
+type: "BOW"
+name: "Arco Épico"
+enchanted_effect: true
+enchanted: true
+lore:
+- "Este arco nunca falla."
+- "Forjado por los antiguos."
+enchants:
+INFINITY: 1
+POWER: 4
+FLAME: 1
 
-    <!-- Main Configuration Section - New Addition -->
-    <section id="main-config" class="section" style="display:none;">
-        <h2><span lang="en">Main Configuration</span><span lang="es">Configuración Principal</span></h2>
+# Warrior's Axe
+item_1650972107000:
+type: "NETHERITE_AXE"
+name: "Hacha del Guerrero"
+enchanted_effect: true
+enchanted: true
+lore:
+- "Corta incluso el acero más fuerte."
+- "Portador de grandes batallas."
+enchants:
+DAMAGE_ALL: 6
+EFFICIENCY: 5
+UNBREAKING: 3
+
+# Indestructible Shield
+item_1650972108000:
+type: "SHIELD"
+name: "Escudo Indestructible"
+enchanted_effect: true
+enchanted: true
+lore:
+- "Protección absoluta."
+- "Solo para los más valientes."
+enchants:
+UNBREAKING: 5
+THORNS: 3</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>item_1650972106000</code>: A bow with infinite arrows, high power, and fire damage, glowing with enchant effects.</li>
+                    <li><code>item_1650972107000</code>: A netherite axe optimized for combat and mining, with durability and glow.</li>
+                    <li><code>item_1650972108000</code>: A shield with high durability and damage reflection, designed for defense.</li>
+                    <li>These examples show how to create balanced, thematic items for various gameplay roles.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>item_1650972106000</code>: Un arco con flechas infinitas, alto poder y daño de fuego, con brillo de encantamiento.</li>
+                    <li><code>item_1650972107000</code>: Un hacha de netherita optimizada para combate y minería, con durabilidad y brillo.</li>
+                    <li><code>item_1650972108000</code>: Un escudo con alta durabilidad y reflexión de daño, diseñado para defensa.</li>
+                    <li>Estos ejemplos muestran cómo crear ítems equilibrados y temáticos para diversos roles de juego.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+    <div class="step">
+        <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
+        <ul>
+            <li lang="en">Use valid Minecraft item types for <code>type</code> (e.g., <code>DIAMOND_SWORD</code>, <code>NETHERITE_AXE</code>).</li>
+            <li lang="es">Usa tipos de ítems válidos de Minecraft para <code>type</code> (por ejemplo, <code>DIAMOND_SWORD</code>, <code>NETHERITE_AXE</code>).</li>
+            <li lang="en">Ensure enchantment names match Minecraft standards (e.g., <code>DAMAGE_ALL</code> for Sharpness).</li>
+            <li lang="es">Asegúrate de que los nombres de encantamientos coincidan con los estándares de Minecraft (por ejemplo, <code>DAMAGE_ALL</code> para Sharpness).</li>
+            <li lang="en">Set <code>enchanted: true</code> if using <code>enchants</code>, even if <code>enchanted_effect</code> is false.</li>
+            <li lang="es">Establece <code>enchanted: true</code> si usas <code>enchants</code>, incluso si <code>enchanted_effect</code> es false.</li>
+        </ul>
+    </div>
+</section>
+<section id="main-config" class="section" style="display:none;">
+    <h2><span lang="en">Main Configuration</span><span lang="es">Configuración Principal</span></h2>
+    
+    <!-- Introduction -->
+    <p lang="en">This section explains the main settings in config.yml, which controls the plugin’s general behavior, boss spawning, health bars, abilities, and permissions.</p>
+    <p lang="es">Esta sección explica las configuraciones principales en config.yml, que controla el comportamiento general del plugin, la aparición de jefes, barras de salud, habilidades y permisos.</p>
+
+    <!-- Step-by-Step -->
+    <div class="step-by-step">
+        <div class="step">
+            <h3><span lang="en">1. General Settings</span><span lang="es">1. Configuraciones Generales</span></h3>
+            <p lang="en">Basic plugin settings for language, updates, and debugging.</p>
+            <p lang="es">Configuraciones básicas del plugin para idioma, actualizaciones y depuración.</p>
+            <div class="code-example">
+                <pre>settings:
+  language: "en_us"
+  check-for-updates: true
+  debug-mode: false</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>language: "en_us"</code>: Sets the language for plugin messages (e.g., "en_us" for English, "es_es" for Spanish).</li>
+                    <li><code>check-for-updates: true</code>: Notifies admins of new plugin versions.</li>
+                    <li><code>debug-mode: false</code>: When true, logs detailed debug info for troubleshooting.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>language: "en_us"</code>: Establece el idioma para los mensajes del plugin (por ejemplo, "en_us" para inglés, "es_es" para español).</li>
+                    <li><code>check-for-updates: true</code>: Notifica a los administradores sobre nuevas versiones del plugin.</li>
+                    <li><code>debug-mode: false</code>: Cuando es true, registra información detallada de depuración.</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="step">
+            <h3><span lang="en">2. Logging Settings</span><span lang="es">2. Configuraciones de Registro</span></h3>
+            <p lang="en">Controls logging for debugging purposes.</p>
+            <p lang="es">Controla el registro para fines de depuración.</p>
+            <div class="code-example">
+                <pre>logging:
+  enable-logs: true
+  log-file: "logs/kinglybosses.log"</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>enable-logs: true</code>: Enables logging of plugin events.</li>
+                    <li><code>log-file: "logs/kinglybosses.log"</code>: Path to the log file relative to the server directory.</li>
+                </ul>
+                Note: Logging is in beta and may be refined in future updates.
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>enable-logs: true</code>: Habilita el registro de eventos del plugin.</li>
+                    <li><code>log-file: "logs/kinglybosses.log"</code>: Ruta al archivo de registro relativa al directorio del servidor.</li>
+                </ul>
+                Nota: El registro está en beta y puede refinarse en futuras actualizaciones.
+            </p>
+        </div>
+    </div>
+
+    <!-- Advanced Configurations -->
+    <div class="config-block">
+        <button class="collapsible"><span lang="en">▸ General Boss Settings</span><span lang="es">▸ Configuraciones Generales de Jefes</span></button>
+        <div class="content">
+            <p lang="en">Controls how bosses spawn globally.</p>
+            <p lang="es">Controla cómo aparecen los jefes globalmente.</p>
+            <div class="code-example">
+                <pre>general:
+  spawnRandom: true
+  spawnInterval: 300
+  broadcastBossSpawn: true
+  location:
+    world: "world"
+    coordinates:
+      x: 0
+      y: 0
+      z: 0</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>spawnRandom: true</code>: Enables random spawning (currently the only mode, temporarily disabled for other options).</li>
+                    <li><code>spawnInterval: 300</code>: Time between random spawns (300 seconds = 5 minutes).</li>
+                    <li><code>broadcastBossSpawn: true</code>: Announces boss spawns to all players.</li>
+                    <li><code>location</code>: Default spawn point if no specific location is set in boss.yml; uses "world" at coordinates (0, 0, 0).</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>spawnRandom: true</code>: Habilita la aparición aleatoria (actualmente el único modo, deshabilitado temporalmente para otras opciones).</li>
+                    <li><code>spawnInterval: 300</code>: Tiempo entre apariciones aleatorias (300 segundos = 5 minutos).</li>
+                    <li><code>broadcastBossSpawn: true</code>: Anuncia las apariciones de jefes a todos los jugadores.</li>
+                    <li><code>location</code>: Punto de aparición predeterminado si no se establece una ubicación específica en boss.yml; usa "world" en las coordenadas (0, 0, 0).</li>
+                </ul>
+            </p>
+        </div>
+
+        <button class="collapsible"><span lang="en">▸ Boss Health Bar</span><span lang="es">▸ Barra de Salud del Jefe</span></button>
+        <div class="content">
+            <p lang="en">Customizes the boss health bar display.</p>
+            <p lang="es">Personaliza la visualización de la barra de salud del jefe.</p>
+            <div class="code-example">
+                <pre>bossHealthBar:
+  active: true
+  title: "&c&lBoss: &7{boss}"
+  color: "RED"
+  style: "SOLID"
+  progress: 1.0
+  update_interval: 0.1
+  display_distance:
+    enabled: true
+    radius: 100
+  permission_based_display:
+    enabled: false
+    permission: "bossbar.view"
+  hide_on_death:
+    enabled: true</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>active: true</code>: Enables the health bar.</li>
+                    <li><code>title</code>: Displayed text; <code>{boss}</code> is replaced by the boss’s name.</li>
+                    <li><code>color: "RED"</code>: Bar color (options: red, blue, green, etc.).</li>
+                    <li><code>style: "SOLID"</code>: Bar style (e.g., solid, segmented_6).</li>
+                    <li><code>progress: 1.0</code>: Initial health percentage (0 to 1).</li>
+                    <li><code>update_interval: 0.1</code>: Updates every 0.1 seconds.</li>
+                    <li><code>display_distance</code>: Limits visibility to players within 100 blocks.</li>
+                    <li><code>permission_based_display</code>: When enabled, restricts visibility to players with the "bossbar.view" permission.</li>
+                    <li><code>hide_on_death: true</code>: Hides the bar when the boss dies.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>active: true</code>: Habilita la barra de salud.</li>
+                    <li><code>title</code>: Texto mostrado; <code>{boss}</code> se reemplaza por el nombre del jefe.</li>
+                    <li><code>color: "RED"</code>: Color de la barra (opciones: red, blue, green, etc.).</li>
+                    <li><code>style: "SOLID"</code>: Estilo de la barra (por ejemplo, solid, segmented_6).</li>
+                    <li><code>progress: 1.0</code>: Porcentaje inicial de salud (0 a 1).</li>
+                    <li><code>update_interval: 0.1</code>: Se actualiza cada 0.1 segundos.</li>
+                    <li><code>display_distance</code>: Limita la visibilidad a jugadores dentro de 100 bloques.</li>
+                    <li><code>permission_based_display</code>: Cuando está habilitado, restringe la visibilidad a jugadores con el permiso "bossbar.view".</li>
+                    <li><code>hide_on_death: true</code>: Oculta la barra cuando el jefe muere.</li>
+                </ul>
+            </p>
+        </div>
+
+        <button class="collapsible"><span lang="en">▸ Abilities</span><span lang="es">▸ Habilidades</span></button>
+        <div class="content">
+            <p lang="en">Defines global boss abilities.</p>
+            <p lang="es">Define las habilidades globales de los jefes.</p>
+            <div class="code-example">
+                <pre>abilities:
+  enableBossAbilities: true
+  abilityCooldown: 10
+  abilityList:
+    - "fireball"
+    - "lightning"
+    - "teleport"
+    - "summon_minions"</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>enableBossAbilities: true</code>: Activates abilities (temporarily disabled).</li>
+                    <li><code>abilityCooldown: 10</code>: Default cooldown between ability uses (10 seconds).</li>
+                    <li><code>abilityList</code>: Predefined abilities available to bosses; specific behaviors depend on implementation.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>enableBossAbilities: true</code>: Activa las habilidades (deshabilitado temporalmente).</li>
+                    <li><code>abilityCooldown: 10</code>: Enfriamiento predeterminado entre usos de habilidades (10 segundos).</li>
+                    <li><code>abilityList</code>: Habilidades predefinidas disponibles para los jefes; los comportamientos específicos dependen de la implementación.</li>
+                </ul>
+            </p>
+        </div>
+
+        <button class="collapsible"><span lang="en">▸ Advanced Mechanics</span><span lang="es">▸ Mecánicas Avanzadas</span></button>
+        <div class="content">
+            <p lang="en">Adds dynamic combat features like enrage and phases.</p>
+            <p lang="es">Añade características dinámicas de combate como furia y fases.</p>
+            <div class="code-example">
+                <pre>advancedMechanics:
+  enrage:
+    enabled: true
+    trigger_health_percentage: 20
+    effect:
+      particle: "FLAME"
+      sound: "ENTITY_ENDER_DRAGON_GROWL"
+    damage_multiplier: 1.5
+  phases:
+    enabled: true
+    phaseList:
+      - health_percentage: 50
+        message: "&cThe boss grows stronger!"
+        abilities: ["lightning", "summon_minions"]
+      - health_percentage: 25
+        message: "&cThe boss is in a frenzy!"
+        abilities: ["fireball", "teleport"]</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>enrage</code>: Boosts the boss at low health.</li>
+                    <li><code>trigger_health_percentage: 20</code>: Enrages at 20% health.</li>
+                    <li><code>effect</code>: Adds visual (flame particles) and audio (dragon growl) cues.</li>
+                    <li><code>damage_multiplier: 1.5</code>: Increases damage by 50% when enraged.</li>
+                    <li><code>phases</code>: Changes boss behavior at health thresholds.</li>
+                    <li><code>phaseList</code>: Defines phases; at 50% health, uses lightning and minions; at 25%, uses fireball and teleport.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>enrage</code>: Potencia al jefe con poca salud.</li>
+                    <li><code>trigger_health_percentage: 20</code>: Se enfurece al 20% de salud.</li>
+                    <li><code>effect</code>: Añade señales visuales (partículas de fuego) y auditivas (rugido de dragón).</li>
+                    <li><code>damage_multiplier: 1.5</code>: Aumenta el daño en un 50% cuando está enfurecido.</li>
+                    <li><code>phases</code>: Cambia el comportamiento del jefe en umbrales de salud.</li>
+                    <li><code>phaseList</code>: Define fases; al 50% de salud, usa relámpagos y minions; al 25%, usa bola de fuego y teletransporte.</li>
+                </ul>
+            </p>
+        </div>
+
+        <button class="collapsible"><span lang="en">▸ Permissions</span><span lang="es">▸ Permisos</span></button>
+        <div class="content">
+            <p lang="en">Defines plugin permissions.</p>
+            <p lang="es">Define los permisos del plugin.</p>
+            <div class="code-example">
+                <pre>permissions:
+  kinglybosses.summon:
+    description: "Permission to summon bosses."
+    default: "op"
+  kinglybosses.disable:
+    description: "Permission to disable bosses."
+    default: "op"
+  kinglybosses.reload:
+    description: "Permission to reload the plugin."
+    default: "op"
+  kinglybosses.info:
+    description: "Permission to view boss information."
+    default: "op"
+  kinglybosses.bypass:
+    description: "Permission to bypass restrictions."
+    default: "op"</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li>Each permission has a <code>description</code> and <code>default</code> value.</li>
+                    <li><code>default: "op"</code>: Only operators have these permissions by default.</li>
+                    <li>Permissions control summoning, disabling, reloading, viewing info, and bypassing restrictions.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li>Cada permiso tiene una <code>description</code> y un valor <code>default</code>.</li>
+                    <li><code>default: "op"</code>: Solo los operadores tienen estos permisos por defecto.</li>
+                    <li>Los permisos controlan la invocación, desactivación, recarga, visualización de información y omisión de restricciones.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Tips and Common Errors -->
+    <div class="step">
+        <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
+        <ul>
+            <li lang="en">Ensure <code>world</code> matches an existing server world.</li>
+            <li lang="es">Asegúrate de que <code>world</code> coincida con un mundo existente en el servidor.</li>
+            <li lang="en">Use valid Minecraft sound and particle names (e.g., <code>ENTITY_ENDER_DRAGON_GROWL</code>, <code>FLAME</code>).</li>
+            <li lang="es">Usa nombres válidos de sonidos y partículas de Minecraft (por ejemplo, <code>ENTITY_ENDER_DRAGON_GROWL</code>, <code>FLAME</code>).</li>
+            <li lang="en">Set <code>debug-mode: true</code> and check logs if issues arise.</li>
+            <li lang="es">Establece <code>debug-mode: true</code> y revisa los registros si surgen problemas.</li>
+        </ul>
+    </div>
+</section>
+<!-- Item Groups Configuration Section - New Addition for itemgroups.yml -->
+<section id="item-groups-config" class="section" style="display:none;">
+    <h2><span lang="en">Item Groups Configuration</span><span lang="es">Configuración de Grupos de Objetos</span></h2>
+    
+    <!-- Introduction -->
+    <p lang="en">This section explains how to configure item groups in itemgroups.yml, which define sets of items that can be awarded as boss rewards with specified probabilities, referencing items from items.yml.</p>
+    <p lang="es">Esta sección explica cómo configurar grupos de objetos en itemgroups.yml, que definen conjuntos de ítems que pueden otorgarse como recompensas de jefes con probabilidades especificadas, haciendo referencia a ítems de items.yml.</p>
+
+    <!-- Step-by-Step -->
+    <div class="step-by-step">
+        <div class="step">
+            <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+            <p lang="en">Item groups are defined under the 'itemgroups' key with a unique identifier.</p>
+            <p lang="es">Los grupos de objetos se definen bajo la clave 'itemgroups' con un identificador único.</p>
+            <div class="code-example">
+                <pre>itemgroups:
+grupo1:
+# Item group settings go here</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong> The <code>itemgroups</code> key is the root for all item group configurations. Each group (e.g., <code>grupo1</code>) is a unique identifier that organizes a set of items and their drop mechanics.</p>
+            <p lang="es"><strong>Explicación:</strong> La clave <code>itemgroups</code> es la raíz de todas las configuraciones de grupos de objetos. Cada grupo (por ejemplo, <code>grupo1</code>) es un identificador único que organiza un conjunto de ítems y sus mecánicas de caída.</p>
+        </div>
+
+        <div class="step">
+            <h3><span lang="en">2. Core Item Group Settings</span><span lang="es">2. Configuraciones Básicas de Grupos de Objetos</span></h3>
+            <p lang="en">Define the number of rolls and the items with their probabilities.</p>
+            <p lang="es">Define el número de tiradas y los ítems con sus probabilidades.</p>
+            <div class="code-example">
+                <pre>grupo1:
+rolls: 1
+items:
+- item: "item_1650972105000"
+probability: 70
+- item: "item_1650972105000"
+probability: 30</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>rolls: 1</code>: Number of times the game randomly selects an item from this group per reward event.</li>
+                    <li><code>items</code>: List of possible items in the group, referencing IDs from items.yml.</li>
+                    <li><code>item: "item_1650972105000"</code>: Unique identifier for an item defined in items.yml.</li>
+                    <li><code>probability: 70</code>: Chance (in percent) of this item being selected per roll; here, the same item has two entries with different probabilities.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>rolls: 1</code>: Número de veces que el juego selecciona aleatoriamente un ítem de este grupo por evento de recompensa.</li>
+                    <li><code>items</code>: Lista de ítems posibles en el grupo, haciendo referencia a IDs de items.yml.</li>
+                    <li><code>item: "item_1650972105000"</code>: Identificador único de un ítem definido en items.yml.</li>
+                    <li><code>probability: 70</code>: Probabilidad (en porcentaje) de que este ítem sea seleccionado por tirada; aquí, el mismo ítem tiene dos entradas con diferentes probabilidades.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Advanced Configurations -->
+    <div class="config-block">
+        <button class="collapsible"><span lang="en">▸ Example Item Groups</span><span lang="es">▸ Ejemplos de Grupos de Objetos</span></button>
+        <div class="content">
+            <p lang="en">Complete examples of different item groups with varying rolls and probabilities.</p>
+            <p lang="es">Ejemplos completos de diferentes grupos de objetos con tiradas y probabilidades variadas.</p>
+            <div class="code-example">
+                <pre># Grupo 2
+grupo2:
+rolls: 2
+items:
+- item: "item_1650972106000"
+probability: 50
+- item: "item_1650972107000"
+probability: 25
+- item: "item_1650972108000"
+probability: 25
+
+# Rare Group
+rare_group:
+rolls: 1
+items:
+- item: "item_rare_sword"
+probability: 10
+- item: "item_rare_shield"
+probability: 90
+
+# Legendary Group
+legendary_group:
+rolls: 3
+items:
+- item: "item_legendary_blade"
+probability: 40
+- item: "item_legendary_armor"
+probability: 30
+- item: "item_legendary_ring"
+probability: 30</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>grupo2</code>: Allows 2 rolls with balanced probabilities (total 100%), offering a mix of items like the bow, axe, and shield from items.yml.</li>
+                    <li><code>rare_group</code>: Single roll with a rare sword (10%) and a more common shield (90%), emphasizing rarity.</li>
+                    <li><code>legendary_group</code>: 3 rolls with high-value items (e.g., blade, armor, ring), probabilities summing to 100%, increasing reward potential.</li>
+                    <li>Probabilities don’t need to sum to 100% per group; the system may normalize them or allow over/under based on plugin mechanics.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>grupo2</code>: Permite 2 tiradas con probabilidades balanceadas (total 100%), ofreciendo una mezcla de ítems como el arco, hacha y escudo de items.yml.</li>
+                    <li><code>rare_group</code>: Una sola tirada con una espada rara (10%) y un escudo más común (90%), enfatizando la rareza.</li>
+                    <li><code>legendary_group</code>: 3 tiradas con ítems de alto valor (por ejemplo, espada, armadura, anillo), probabilidades que suman 100%, aumentando el potencial de recompensa.</li>
+                    <li>Las probabilidades no necesitan sumar 100% por grupo; el sistema puede normalizarlas o permitir más/menos según las mecánicas del plugin.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Tips and Common Errors -->
+    <div class="step">
+        <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
+        <ul>
+            <li lang="en">Ensure <code>item</code> IDs match those defined in items.yml or valid Minecraft item names.</li>
+            <li lang="es">Asegúrate de que los IDs de <code>item</code> coincidan con los definidos en items.yml o nombres de ítems válidos de Minecraft.</li>
+            <li lang="en">Adjust <code>rolls</code> and <code>probability</code> to balance reward frequency and rarity.</li>
+            <li lang="es">Ajusta <code>rolls</code> y <code>probability</code> para equilibrar la frecuencia y la rareza de las recompensas.</li>
+            <li lang="en">Test groups with high <code>rolls</code> to avoid overwhelming players with items.</li>
+            <li lang="es">Prueba grupos con <code>rolls</code> altos para evitar abrumar a los jugadores con ítems.</li>
+        </ul>
+    </div>
+</section>
+<!-- Items Configuration Section - Updated for items.yml -->
+<section id="items-config" class="section" style="display:none;">
+    <h2><span lang="en">Items Configuration</span><span lang="es">Configuración de Objetos</span></h2>
+    
+    <!-- Introduction -->
+    <p lang="en">This section explains how to configure individual items in items.yml, which can be used as boss rewards, equipment, or other purposes, with custom properties and enchantments.</p>
+    <p lang="es">Esta sección explica cómo configurar objetos individuales en items.yml, que pueden usarse como recompensas de jefes, equipamiento u otros fines, con propiedades y encantamientos personalizados.</p>
+
+    <!-- Step-by-Step -->
+    <div class="step-by-step">
+        <div class="step">
+            <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+            <p lang="en">Items are defined under the 'items' key with a unique identifier, often a timestamp.</p>
+            <p lang="es">Los objetos se definen bajo la clave 'items' con un identificador único, a menudo un timestamp.</p>
+            <div class="code-example">
+                <pre>items:
+item_1650972105000:
+# Item settings go here</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong> The <code>items</code> key is the root for all item definitions. Each item (e.g., <code>item_1650972105000</code>) uses a unique identifier, typically a timestamp, to avoid conflicts and track items easily.</p>
+            <p lang="es"><strong>Explicación:</strong> La clave <code>items</code> es la raíz de todas las definiciones de objetos. Cada objeto (por ejemplo, <code>item_1650972105000</code>) usa un identificador único, típicamente un timestamp, para evitar conflictos y rastrear ítems fácilmente.</p>
+        </div>
+
+        <div class="step">
+            <h3><span lang="en">2. Core Item Settings</span><span lang="es">2. Configuraciones Básicas de Objetos</span></h3>
+            <p lang="en">Define the item’s type, name, enchantments, and lore.</p>
+            <p lang="es">Define el tipo, nombre, encantamientos y lore del objeto.</p>
+            <div class="code-example">
+                <pre>item_1650972105000:
+type: "DIAMOND_SWORD"
+name: "Espada de Diamante"
+enchanted_effect: false
+enchanted: true
+lore:
+- "Un ítem muy poderoso."
+- "Desata tu verdadero potencial."
+enchants:
+DAMAGE_ALL: 5
+DURABILITY: 3</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>type: "DIAMOND_SWORD"</code>: Minecraft item type (e.g., DIAMOND_SWORD, BOW, SHIELD).</li>
+                    <li><code>name: "Espada de Diamante"</code>: Custom display name, supports color codes.</li>
+                    <li><code>enchanted_effect: false</code>: If true, shows enchantment glow even without enchants; false hides it unless enchanted.</li>
+                    <li><code>enchanted: true</code>: Indicates the item has enchantments.</li>
+                    <li><code>lore</code>: List of descriptive lines shown in the item tooltip.</li>
+                    <li><code>enchants</code>: Enchantments with levels (e.g., <code>DAMAGE_ALL: 5</code> is Sharpness V, <code>DURABILITY: 3</code> is Unbreaking III).</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>type: "DIAMOND_SWORD"</code>: Tipo de ítem de Minecraft (por ejemplo, DIAMOND_SWORD, BOW, SHIELD).</li>
+                    <li><code>name: "Espada de Diamante"</code>: Nombre personalizado, soporta códigos de color.</li>
+                    <li><code>enchanted_effect: false</code>: Si es true, muestra el brillo de encantamiento incluso sin encantamientos; false lo oculta a menos que esté encantado.</li>
+                    <li><code>enchanted: true</code>: Indica que el ítem tiene encantamientos.</li>
+                    <li><code>lore</code>: Lista de líneas descriptivas mostradas en la descripción del ítem.</li>
+                    <li><code>enchants</code>: Encantamientos con niveles (por ejemplo, <code>DAMAGE_ALL: 5</code> es Sharpness V, <code>DURABILITY: 3</code> es Unbreaking III).</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Advanced Configurations -->
+    <div class="config-block">
+        <button class="collapsible"><span lang="en">▸ Example Items</span><span lang="es">▸ Ejemplos de Objetos</span></button>
+        <div class="content">
+            <p lang="en">Complete examples of custom items with different properties.</p>
+            <p lang="es">Ejemplos completos de objetos personalizados con diferentes propiedades.</p>
+            <div class="code-example">
+                <pre># Epic Bow
+item_1650972106000:
+type: "BOW"
+name: "Arco Épico"
+enchanted_effect: true
+enchanted: true
+lore:
+- "Este arco nunca falla."
+- "Forjado por los antiguos."
+enchants:
+INFINITY: 1
+POWER: 4
+FLAME: 1
+
+# Warrior's Axe
+item_1650972107000:
+type: "NETHERITE_AXE"
+name: "Hacha del Guerrero"
+enchanted_effect: true
+enchanted: true
+lore:
+- "Corta incluso el acero más fuerte."
+- "Portador de grandes batallas."
+enchants:
+DAMAGE_ALL: 6
+EFFICIENCY: 5
+UNBREAKING: 3
+
+# Indestructible Shield
+item_1650972108000:
+type: "SHIELD"
+name: "Escudo Indestructible"
+enchanted_effect: true
+enchanted: true
+lore:
+- "Protección absoluta."
+- "Solo para los más valientes."
+enchants:
+UNBREAKING: 5
+THORNS: 3</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>item_1650972106000</code>: A bow with infinite arrows, high power, and fire damage, glowing with enchant effects.</li>
+                    <li><code>item_1650972107000</code>: A netherite axe optimized for combat and mining, with durability and glow.</li>
+                    <li><code>item_1650972108000</code>: A shield with high durability and damage reflection, designed for defense.</li>
+                    <li>These examples show how to create balanced, thematic items for various gameplay roles.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>item_1650972106000</code>: Un arco con flechas infinitas, alto poder y daño de fuego, con brillo de encantamiento.</li>
+                    <li><code>item_1650972107000</code>: Un hacha de netherita optimizada para combate y minería, con durabilidad y brillo.</li>
+                    <li><code>item_1650972108000</code>: Un escudo con alta durabilidad y reflexión de daño, diseñado para defensa.</li>
+                    <li>Estos ejemplos muestran cómo crear ítems equilibrados y temáticos para diversos roles de juego.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Tips and Common Errors -->
+    <div class="step">
+        <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
+        <ul>
+            <li lang="en">Use valid Minecraft item types for <code>type</code> (e.g., <code>DIAMOND_SWORD</code>, <code>NETHERITE_AXE</code>).</li>
+            <li lang="es">Usa tipos de ítems válidos de Minecraft para <code>type</code> (por ejemplo, <code>DIAMOND_SWORD</code>, <code>NETHERITE_AXE</code>).</li>
+            <li lang="en">Ensure enchantment names match Minecraft standards (e.g., <code>DAMAGE_ALL</code> for Sharpness).</li>
+            <li lang="es">Asegúrate de que los nombres de encantamientos coincidan con los estándares de Minecraft (por ejemplo, <code>DAMAGE_ALL</code> para Sharpness).</li>
+            <li lang="en">Set <code>enchanted: true</code> if using <code>enchants</code>, even if <code>enchanted_effect</code> is false.</li>
+            <li lang="es">Establece <code>enchanted: true</code> si usas <code>enchants</code>, incluso si <code>enchanted_effect</code> es false.</li>
+        </ul>
+    </div>
+</section>
+    <!-- Groups Configuration Section - New Addition -->
+    <section id="groups-config" class="section" style="display:none;">
+        <h2><span lang="en">Groups Configuration</span><span lang="es">Configuración de Grupos</span></h2>
         
         <!-- Introduction -->
-        <p lang="en">This section explains the main settings in config.yml, which controls the plugin’s general behavior, boss spawning, health bars, abilities, and permissions.</p>
-        <p lang="es">Esta sección explica las configuraciones principales en config.yml, que controla el comportamiento general del plugin, la aparición de jefes, barras de salud, habilidades y permisos.</p>
+        <p lang="en">This section explains how to configure groups of bosses in groups.yml, allowing you to organize bosses into categories with shared spawn settings.</p>
+        <p lang="es">Esta sección explica cómo configurar grupos de jefes en groups.yml, permitiéndote organizar jefes en categorías con configuraciones de aparición compartidas.</p>
 
         <!-- Step-by-Step -->
         <div class="step-by-step">
             <div class="step">
-                <h3><span lang="en">1. General Settings</span><span lang="es">1. Configuraciones Generales</span></h3>
-                <p lang="en">Basic plugin settings for language, updates, and debugging.</p>
-                <p lang="es">Configuraciones básicas del plugin para idioma, actualizaciones y depuración.</p>
+                <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+                <p lang="en">Groups are defined under the 'groups' key with a unique identifier.</p>
+                <p lang="es">Los grupos se definen bajo la clave 'groups' con un identificador único.</p>
                 <div class="code-example">
-                    <pre>settings:
-language: "en_us"
-check-for-updates: true
-debug-mode: false</pre>
+                    <pre>groups:
+boss_group_1:
+# Group settings go here</pre>
                 </div>
-                <p lang="en"><strong>Explanation:</strong>
-                    <ul>
-                        <li><code>language: "en_us"</code>: Sets the language for plugin messages (e.g., "en_us" for English, "es_es" for Spanish).</li>
-                        <li><code>check-for-updates: true</code>: Notifies admins of new plugin versions.</li>
-                        <li><code>debug-mode: false</code>: When true, logs detailed debug info for troubleshooting.</li>
-                    </ul>
-                </p>
-                <p lang="es"><strong>Explicación:</strong>
-                    <ul>
-                        <li><code>language: "en_us"</code>: Establece el idioma para los mensajes del plugin (por ejemplo, "en_us" para inglés, "es_es" para español).</li>
-                        <li><code>check-for-updates: true</code>: Notifica a los administradores sobre nuevas versiones del plugin.</li>
-                        <li><code>debug-mode: false</code>: Cuando es true, registra información detallada de depuración.</li>
-                    </ul>
-                </p>
+                <p lang="en"><strong>Explanation:</strong> The <code>groups</code> key is the root for all group configurations. Each group (e.g., <code>boss_group_1</code>) is a unique identifier that organizes a set of bosses and their shared settings.</p>
+                <p lang="es"><strong>Explicación:</strong> La clave <code>groups</code> es la raíz de todas las configuraciones de grupos. Cada grupo (por ejemplo, <code>boss_group_1</code>) es un identificador único que organiza un conjunto de jefes y sus configuraciones compartidas.</p>
             </div>
 
             <div class="step">
-                <h3><span lang="en">2. Logging Settings</span><span lang="es">2. Configuraciones de Registro</span></h3>
-                <p lang="en">Controls logging for debugging purposes.</p>
-                <p lang="es">Controla el registro para fines de depuración.</p>
+                <h3><span lang="en">2. Core Group Settings</span><span lang="es">2. Configuraciones Básicas de Grupo</span></h3>
+                <p lang="en">Define the group type and spawn options.</p>
+                <p lang="es">Define el tipo de grupo y las opciones de aparición.</p>
                 <div class="code-example">
-                    <pre>logging:
-enable-logs: true
-log-file: "logs/kinglybosses.log"</pre>
+                    <pre>boss_group_1:
+type: "boss"
+boss_options:
+activespawnInterval: false
+spawnInterval: 1000</pre>
                 </div>
                 <p lang="en"><strong>Explanation:</strong>
                     <ul>
-                        <li><code>enable-logs: true</code>: Enables logging of plugin events.</li>
-                        <li><code>log-file: "logs/kinglybosses.log"</code>: Path to the log file relative to the server directory.</li>
+                        <li><code>type: "boss"</code>: Specifies the group category (e.g., "boss", "mythic", "elite"). This can influence behavior or theme.</li>
+                        <li><code>boss_options</code>: Contains spawn-related settings for the group.</li>
+                        <li><code>activespawnInterval: false</code>: If false, uses the global spawn interval; if true, uses the custom interval below.</li>
+                        <li><code>spawnInterval: 1000</code>: Custom spawn interval in milliseconds (1000 ms = 1 second).</li>
                     </ul>
-                    Note: Logging is in beta and may be refined in future updates.
                 </p>
                 <p lang="es"><strong>Explicación:</strong>
                     <ul>
-                        <li><code>enable-logs: true</code>: Habilita el registro de eventos del plugin.</li>
-                        <li><code>log-file: "logs/kinglybosses.log"</code>: Ruta al archivo de registro relativa al directorio del servidor.</li>
+                        <li><code>type: "boss"</code>: Especifica la categoría del grupo (por ejemplo, "boss", "mythic", "elite"). Esto puede influir en el comportamiento o tema.</li>
+                        <li><code>boss_options</code>: Contiene configuraciones relacionadas con la aparición del grupo.</li>
+                        <li><code>activespawnInterval: false</code>: Si es false, usa el intervalo de aparición global; si es true, usa el intervalo personalizado abajo.</li>
+                        <li><code>spawnInterval: 1000</code>: Intervalo de aparición personalizado en milisegundos (1000 ms = 1 segundo).</li>
                     </ul>
-                    Nota: El registro está en beta y puede refinarse en futuras actualizaciones.
                 </p>
             </div>
         </div>
 
         <!-- Advanced Configurations -->
         <div class="config-block">
-            <button class="collapsible"><span lang="en">▸ General Boss Settings</span><span lang="es">▸ Configuraciones Generales de Jefes</span></button>
+            <button class="collapsible"><span lang="en">▸ Bosses in a Group</span><span lang="es">▸ Jefes en un Grupo</span></button>
             <div class="content">
-                <p lang="en">Controls how bosses spawn globally.</p>
-                <p lang="es">Controla cómo aparecen los jefes globalmente.</p>
+                <p lang="en">List the bosses belonging to the group and their activation status.</p>
+                <p lang="es">Lista los jefes que pertenecen al grupo y su estado de activación.</p>
                 <div class="code-example">
-                    <pre>general:
-spawnRandom: true
-spawnInterval: 300
-broadcastBossSpawn: true
-location:
-world: "world"
-coordinates:
-  x: 0
-  y: 0
-  z: 0</pre>
+                    <pre>boss_group_1:
+bosses:
+boss_1:
+  name: "boss1"
+  active: false
+boss_2:
+  name: "boss2"
+  active: false</pre>
                 </div>
                 <p lang="en"><strong>Explanation:</strong>
                     <ul>
-                        <li><code>spawnRandom: true</code>: Enables random spawning (currently the only mode, temporarily disabled for other options).</li>
-                        <li><code>spawnInterval: 300</code>: Time between random spawns (300 seconds = 5 minutes).</li>
-                        <li><code>broadcastBossSpawn: true</code>: Announces boss spawns to all players.</li>
-                        <li><code>location</code>: Default spawn point if no specific location is set in boss.yml; uses "world" at coordinates (0, 0, 0).</li>
+                        <li><code>bosses</code>: Section listing bosses in the group.</li>
+                        <li><code>boss_1</code>, <code>boss_2</code>: Unique identifiers for each boss within the group (these are not the same as <code>boss-id</code> in boss.yml).</li>
+                        <li><code>name: "boss1"</code>: References a boss defined in boss.yml by its identifier (e.g., <code>'boss1'</code>).</li>
+                        <li><code>active: false</code>: Determines if this boss is enabled within the group; if false, it won’t spawn even if enabled in boss.yml.</li>
                     </ul>
                 </p>
                 <p lang="es"><strong>Explicación:</strong>
                     <ul>
-                        <li><code>spawnRandom: true</code>: Habilita la aparición aleatoria (actualmente el único modo, deshabilitado temporalmente para otras opciones).</li>
-                        <li><code>spawnInterval: 300</code>: Tiempo entre apariciones aleatorias (300 segundos = 5 minutos).</li>
-                        <li><code>broadcastBossSpawn: true</code>: Anuncia las apariciones de jefes a todos los jugadores.</li>
-                        <li><code>location</code>: Punto de aparición predeterminado si no se establece una ubicación específica en boss.yml; usa "world" en las coordenadas (0, 0, 0).</li>
+                        <li><code>bosses</code>: Sección que lista los jefes en el grupo.</li>
+                        <li><code>boss_1</code>, <code>boss_2</code>: Identificadores únicos para cada jefe dentro del grupo (no son lo mismo que <code>boss-id</code> en boss.yml).</li>
+                        <li><code>name: "boss1"</code>: Hace referencia a un jefe definido en boss.yml por su identificador (por ejemplo, <code>'boss1'</code>).</li>
+                        <li><code>active: false</code>: Determina si este jefe está habilitado dentro del grupo; si es false, no aparecerá incluso si está habilitado en boss.yml.</li>
                     </ul>
                 </p>
             </div>
 
-            <button class="collapsible"><span lang="en">▸ Boss Health Bar</span><span lang="es">▸ Barra de Salud del Jefe</span></button>
+            <button class="collapsible"><span lang="en">▸ Example Groups</span><span lang="es">▸ Ejemplos de Grupos</span></button>
             <div class="content">
-                <p lang="en">Customizes the boss health bar display.</p>
-                <p lang="es">Personaliza la visualización de la barra de salud del jefe.</p>
+                <p lang="en">Complete examples of different group types.</p>
+                <p lang="es">Ejemplos completos de diferentes tipos de grupos.</p>
                 <div class="code-example">
-                    <pre>bossHealthBar:
-active: true
-title: "&c&lBoss: &7{boss}"
-color: "RED"
-style: "SOLID"
-progress: 1.0
-update_interval: 0.1
-display_distance:
-enabled: true
-radius: 100
-permission_based_display:
-enabled: false
-permission: "bossbar.view"
-hide_on_death:
-enabled: true</pre>
-                </div>
-                <p lang="en"><strong>Explanation:</strong>
-                    <ul>
-                        <li><code>active: true</code>: Enables the health bar.</li>
-                        <li><code>title</code>: Displayed text; <code>{boss}</code> is replaced by the boss’s name.</li>
-                        <li><code>color: "RED"</code>: Bar color (options: red, blue, green, etc.).</li>
-                        <li><code>style: "SOLID"</code>: Bar style (e.g., solid, segmented_6).</li>
-                        <li><code>progress: 1.0</code>: Initial health percentage (0 to 1).</li>
-                        <li><code>update_interval: 0.1</code>: Updates every 0.1 seconds.</li>
-                        <li><code>display_distance</code>: Limits visibility to players within 100 blocks.</li>
-                        <li><code>permission_based_display</code>: When enabled, restricts visibility to players with the "bossbar.view" permission.</li>
-                        <li><code>hide_on_death: true</code>: Hides the bar when the boss dies.</li>
-                    </ul>
-                </p>
-                <p lang="es"><strong>Explicación:</strong>
-                    <ul>
-                        <li><code>active: true</code>: Habilita la barra de salud.</li>
-                        <li><code>title</code>: Texto mostrado; <code>{boss}</code> se reemplaza por el nombre del jefe.</li>
-                        <li><code>color: "RED"</code>: Color de la barra (opciones: red, blue, green, etc.).</li>
-                        <li><code>style: "SOLID"</code>: Estilo de la barra (por ejemplo, solid, segmented_6).</li>
-                        <li><code>progress: 1.0</code>: Porcentaje inicial de salud (0 a 1).</li>
-                        <li><code>update_interval: 0.1</code>: Se actualiza cada 0.1 segundos.</li>
-                        <li><code>display_distance</code>: Limita la visibilidad a jugadores dentro de 100 bloques.</li>
-                        <li><code>permission_based_display</code>: Cuando está habilitado, restringe la visibilidad a jugadores con el permiso "bossbar.view".</li>
-                        <li><code>hide_on_death: true</code>: Oculta la barra cuando el jefe muere.</li>
-                    </ul>
-                </p>
-            </div>
+                    <pre># Boss Group 2 (Mythic)
+boss_group_2:
+type: "mythic"
+boss_options:
+activespawnInterval: true
+spawnInterval: 2000
+bosses:
+boss_1:
+  name: "boss1"
+  active: false
+boss_3:
+  name: "boss3"
+  active: true
 
-            <button class="collapsible"><span lang="en">▸ Abilities</span><span lang="es">▸ Habilidades</span></button>
-            <div class="content">
-                <p lang="en">Defines global boss abilities.</p>
-                <p lang="es">Define las habilidades globales de los jefes.</p>
-                <div class="code-example">
-                    <pre>abilities:
-enableBossAbilities: true
-abilityCooldown: 10
-abilityList:
-- "fireball"
-- "lightning"
-- "teleport"
-- "summon_minions"</pre>
+# Elite Group 1
+elite_group_1:
+type: "elite"
+boss_options:
+activespawnInterval: true
+spawnInterval: 1500
+bosses:
+elite_1:
+  name: "elite1"
+  active: true
+elite_2:
+  name: "elite2"
+  active: false</pre>
                 </div>
                 <p lang="en"><strong>Explanation:</strong>
                     <ul>
-                        <li><code>enableBossAbilities: true</code>: Activates abilities (temporarily disabled).</li>
-                        <li><code>abilityCooldown: 10</code>: Default cooldown between ability uses (10 seconds).</li>
-                        <li><code>abilityList</code>: Predefined abilities available to bosses; specific behaviors depend on implementation.</li>
+                        <li><code>boss_group_2</code>: A "mythic" group with a 2-second spawn interval; only "boss3" is active.</li>
+                        <li><code>elite_group_1</code>: An "elite" group with a 1.5-second spawn interval; only "elite1" is active.</li>
+                        <li>These examples show how to mix group types and selectively activate bosses for varied gameplay.</li>
                     </ul>
                 </p>
                 <p lang="es"><strong>Explicación:</strong>
                     <ul>
-                        <li><code>enableBossAbilities: true</code>: Activa las habilidades (deshabilitado temporalmente).</li>
-                        <li><code>abilityCooldown: 10</code>: Enfriamiento predeterminado entre usos de habilidades (10 segundos).</li>
-                        <li><code>abilityList</code>: Habilidades predefinidas disponibles para los jefes; los comportamientos específicos dependen de la implementación.</li>
-                    </ul>
-                </p>
-            </div>
-
-            <button class="collapsible"><span lang="en">▸ Advanced Mechanics</span><span lang="es">▸ Mecánicas Avanzadas</span></button>
-            <div class="content">
-                <p lang="en">Adds dynamic combat features like enrage and phases.</p>
-                <p lang="es">Añade características dinámicas de combate como furia y fases.</p>
-                <div class="code-example">
-                    <pre>advancedMechanics:
-enrage:
-enabled: true
-trigger_health_percentage: 20
-effect:
-  particle: "FLAME"
-  sound: "ENTITY_ENDER_DRAGON_GROWL"
-damage_multiplier: 1.5
-phases:
-enabled: true
-phaseList:
-  - health_percentage: 50
-    message: "&cThe boss grows stronger!"
-    abilities: ["lightning", "summon_minions"]
-  - health_percentage: 25
-    message: "&cThe boss is in a frenzy!"
-    abilities: ["fireball", "teleport"]</pre>
-                </div>
-                <p lang="en"><strong>Explanation:</strong>
-                    <ul>
-                        <li><code>enrage</code>: Boosts the boss at low health.</li>
-                        <li><code>trigger_health_percentage: 20</code>: Enrages at 20% health.</li>
-                        <li><code>effect</code>: Adds visual (flame particles) and audio (dragon growl) cues.</li>
-                        <li><code>damage_multiplier: 1.5</code>: Increases damage by 50% when enraged.</li>
-                        <li><code>phases</code>: Changes boss behavior at health thresholds.</li>
-                        <li><code>phaseList</code>: Defines phases; at 50% health, uses lightning and minions; at 25%, uses fireball and teleport.</li>
-                    </ul>
-                </p>
-                <p lang="es"><strong>Explicación:</strong>
-                    <ul>
-                        <li><code>enrage</code>: Potencia al jefe con poca salud.</li>
-                        <li><code>trigger_health_percentage: 20</code>: Se enfurece al 20% de salud.</li>
-                        <li><code>effect</code>: Añade señales visuales (partículas de fuego) y auditivas (rugido de dragón).</li>
-                        <li><code>damage_multiplier: 1.5</code>: Aumenta el daño en un 50% cuando está enfurecido.</li>
-                        <li><code>phases</code>: Cambia el comportamiento del jefe en umbrales de salud.</li>
-                        <li><code>phaseList</code>: Define fases; al 50% de salud, usa relámpagos y minions; al 25%, usa bola de fuego y teletransporte.</li>
-                    </ul>
-                </p>
-            </div>
-
-            <button class="collapsible"><span lang="en">▸ Permissions</span><span lang="es">▸ Permisos</span></button>
-            <div class="content">
-                <p lang="en">Defines plugin permissions.</p>
-                <p lang="es">Define los permisos del plugin.</p>
-                <div class="code-example">
-                    <pre>permissions:
-kinglybosses.summon:
-description: "Permission to summon bosses."
-default: "op"
-kinglybosses.disable:
-description: "Permission to disable bosses."
-default: "op"
-kinglybosses.reload:
-description: "Permission to reload the plugin."
-default: "op"
-kinglybosses.info:
-description: "Permission to view boss information."
-default: "op"
-kinglybosses.bypass:
-description: "Permission to bypass restrictions."
-default: "op"</pre>
-                </div>
-                <p lang="en"><strong>Explanation:</strong>
-                    <ul>
-                        <li>Each permission has a <code>description</code> and <code>default</code> value.</li>
-                        <li><code>default: "op"</code>: Only operators have these permissions by default.</li>
-                        <li>Permissions control summoning, disabling, reloading, viewing info, and bypassing restrictions.</li>
-                    </ul>
-                </p>
-                <p lang="es"><strong>Explicación:</strong>
-                    <ul>
-                        <li>Cada permiso tiene una <code>description</code> y un valor <code>default</code>.</li>
-                        <li><code>default: "op"</code>: Solo los operadores tienen estos permisos por defecto.</li>
-                        <li>Los permisos controlan la invocación, desactivación, recarga, visualización de información y omisión de restricciones.</li>
+                        <li><code>boss_group_2</code>: Un grupo "mythic" con un intervalo de aparición de 2 segundos; solo "boss3" está activo.</li>
+                        <li><code>elite_group_1</code>: Un grupo "elite" con un intervalo de aparición de 1.5 segundos; solo "elite1" está activo.</li>
+                        <li>Estos ejemplos muestran cómo mezclar tipos de grupos y activar selectivamente jefes para un juego variado.</li>
                     </ul>
                 </p>
             </div>
@@ -559,12 +1111,137 @@ default: "op"</pre>
         <div class="step">
             <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
             <ul>
-                <li lang="en">Ensure <code>world</code> matches an existing server world.</li>
-                <li lang="es">Asegúrate de que <code>world</code> coincida con un mundo existente en el servidor.</li>
-                <li lang="en">Use valid Minecraft sound and particle names (e.g., <code>ENTITY_ENDER_DRAGON_GROWL</code>, <code>FLAME</code>).</li>
-                <li lang="es">Usa nombres válidos de sonidos y partículas de Minecraft (por ejemplo, <code>ENTITY_ENDER_DRAGON_GROWL</code>, <code>FLAME</code>).</li>
-                <li lang="en">Set <code>debug-mode: true</code> and check logs if issues arise.</li>
-                <li lang="es">Establece <code>debug-mode: true</code> y revisa los registros si surgen problemas.</li>
+                <li lang="en">Ensure <code>name</code> matches a boss identifier from boss.yml.</li>
+                <li lang="es">Asegúrate de que <code>name</code> coincida con un identificador de jefe de boss.yml.</li>
+                <li lang="en">Set <code>activespawnInterval: true</code> to use <code>spawnInterval</code>; otherwise, it’s ignored.</li>
+                <li lang="es">Establece <code>activespawnInterval: true</code> para usar <code>spawnInterval</code>; de lo contrario, se ignora.</li>
+                <li lang="en">A boss must be <code>enabled: true</code> in boss.yml and <code>active: true</code> here to spawn.</li>
+                <li lang="es">Un jefe debe tener <code>enabled: true</code> en boss.yml y <code>active: true</code> aquí para aparecer.</li>
+            </ul>
+        </div>
+    </section>
+    <!-- Items Configuration Section - New Addition -->
+    <section id="items-config" class="section" style="display:none;">
+        <h2><span lang="en">Items Configuration</span><span lang="es">Configuración de Objetos</span></h2>
+        
+        <!-- Introduction -->
+        <p lang="en">This section explains how to configure item groups in itemgroups.yml, which define sets of items that can be awarded as boss rewards with specified probabilities.</p>
+        <p lang="es">Esta sección explica cómo configurar grupos de objetos en itemgroups.yml, que definen conjuntos de ítems que pueden otorgarse como recompensas de jefes con probabilidades especificadas.</p>
+
+        <!-- Step-by-Step -->
+        <div class="step-by-step">
+            <div class="step">
+                <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+                <p lang="en">Item groups are defined under the 'itemgroups' key with a unique identifier.</p>
+                <p lang="es">Los grupos de objetos se definen bajo la clave 'itemgroups' con un identificador único.</p>
+                <div class="code-example">
+                    <pre>itemgroups:
+grupo1:
+# Item group settings go here</pre>
+                </div>
+                <p lang="en"><strong>Explanation:</strong> The <code>itemgroups</code> key is the root for all item group configurations. Each group (e.g., <code>grupo1</code>) is a unique identifier that organizes a set of items and their drop mechanics.</p>
+                <p lang="es"><strong>Explicación:</strong> La clave <code>itemgroups</code> es la raíz de todas las configuraciones de grupos de objetos. Cada grupo (por ejemplo, <code>grupo1</code>) es un identificador único que organiza un conjunto de ítems y sus mecánicas de caída.</p>
+            </div>
+
+            <div class="step">
+                <h3><span lang="en">2. Core Item Group Settings</span><span lang="es">2. Configuraciones Básicas de Grupos de Objetos</span></h3>
+                <p lang="en">Define the number of rolls and the items with their probabilities.</p>
+                <p lang="es">Define el número de tiradas y los ítems con sus probabilidades.</p>
+                <div class="code-example">
+                    <pre>grupo1:
+rolls: 1
+items:
+- item: "item_1650972105000"
+  probability: 70
+- item: "item_1650972105000"
+  probability: 30</pre>
+                </div>
+                <p lang="en"><strong>Explanation:</strong>
+                    <ul>
+                        <li><code>rolls: 1</code>: Number of times the game randomly selects an item from this group per reward event.</li>
+                        <li><code>items</code>: List of possible items in the group.</li>
+                        <li><code>item: "item_1650972105000"</code>: Unique identifier for the item (e.g., a custom item or Minecraft item ID).</li>
+                        <li><code>probability: 70</code>: Chance (in percent) of this item being selected per roll; here, the same item has two entries with different probabilities.</li>
+                    </ul>
+                </p>
+                <p lang="es"><strong>Explicación:</strong>
+                    <ul>
+                        <li><code>rolls: 1</code>: Número de veces que el juego selecciona aleatoriamente un ítem de este grupo por evento de recompensa.</li>
+                        <li><code>items</code>: Lista de ítems posibles en el grupo.</li>
+                        <li><code>item: "item_1650972105000"</code>: Identificador único del ítem (por ejemplo, un ítem personalizado o ID de Minecraft).</li>
+                        <li><code>probability: 70</code>: Probabilidad (en porcentaje) de que este ítem sea seleccionado por tirada; aquí, el mismo ítem tiene dos entradas con diferentes probabilidades.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Advanced Configurations -->
+        <div class="config-block">
+            <button class="collapsible"><span lang="en">▸ Example Item Groups</span><span lang="es">▸ Ejemplos de Grupos de Objetos</span></button>
+            <div class="content">
+                <p lang="en">Complete examples of different item groups with varying rolls and probabilities.</p>
+                <p lang="es">Ejemplos completos de diferentes grupos de objetos con tiradas y probabilidades variadas.</p>
+                <div class="code-example">
+                    <pre># Grupo 2
+grupo2:
+rolls: 2
+items:
+- item: "item_1650972106000"
+  probability: 50
+- item: "item_1650972107000"
+  probability: 25
+- item: "item_1650972108000"
+  probability: 25
+
+# Rare Group
+rare_group:
+rolls: 1
+items:
+- item: "item_rare_sword"
+  probability: 10
+- item: "item_rare_shield"
+  probability: 90
+
+# Legendary Group
+legendary_group:
+rolls: 3
+items:
+- item: "item_legendary_blade"
+  probability: 40
+- item: "item_legendary_armor"
+  probability: 30
+- item: "item_legendary_ring"
+  probability: 30</pre>
+                </div>
+                <p lang="en"><strong>Explanation:</strong>
+                    <ul>
+                        <li><code>grupo2</code>: Allows 2 rolls with balanced probabilities (total 100%), offering a mix of items.</li>
+                        <li><code>rare_group</code>: Single roll with a rare sword (10%) and a more common shield (90%), emphasizing rarity.</li>
+                        <li><code>legendary_group</code>: 3 rolls with high-value items, probabilities summing to 100%, increasing reward potential.</li>
+                        <li>Probabilities don’t need to sum to 100% per group; the system may normalize them or allow over/under based on plugin mechanics.</li>
+                    </ul>
+                </p>
+                <p lang="es"><strong>Explicación:</strong>
+                    <ul>
+                        <li><code>grupo2</code>: Permite 2 tiradas con probabilidades balanceadas (total 100%), ofreciendo una mezcla de ítems.</li>
+                        <li><code>rare_group</code>: Una sola tirada con una espada rara (10%) y un escudo más común (90%), enfatizando la rareza.</li>
+                        <li><code>legendary_group</code>: 3 tiradas con ítems de alto valor, probabilidades que suman 100%, aumentando el potencial de recompensa.</li>
+                        <li>Las probabilidades no necesitan sumar 100% por grupo; el sistema puede normalizarlas o permitir más/menos según las mecánicas del plugin.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Tips and Common Errors -->
+        <div class="step">
+            <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
+            <ul>
+                <li lang="en">Ensure <code>item</code> IDs are valid (e.g., match custom items or Minecraft item names).</li>
+                <li lang="es">Asegúrate de que los IDs de <code>item</code> sean válidos (por ejemplo, coincidan con ítems personalizados o nombres de ítems de Minecraft).</li>
+                <li lang="en">Adjust <code>rolls</code> and <code>probability</code> to balance reward frequency and rarity.</li>
+                <li lang="es">Ajusta <code>rolls</code> y <code>probability</code> para equilibrar la frecuencia y la rareza de las recompensas.</li>
+                <li lang="en">Test groups with high <code>rolls</code> to avoid overwhelming players with items.</li>
+                <li lang="es">Prueba grupos con <code>rolls</code> altos para evitar abrumar a los jugadores con ítems.</li>
             </ul>
         </div>
     </section>
@@ -1094,125 +1771,637 @@ default: "op"</pre>
     </div>
 </section>
 <!-- Attacks Configuration Section -->
+<!-- Attacks Configuration Section - New Addition -->
 <section id="attacks-config" class="section" style="display:none;">
-    <h2><span lang="en">Advanced Attack System</span><span lang="es">Sistema de Ataques Avanzado</span></h2>
+    <h2><span lang="en">Attacks Configuration</span><span lang="es">Configuración de Ataques</span></h2>
+    
+    <!-- Introduction -->
+    <p lang="en">This section explains how to configure boss attacks in attacks.yml, defining various types like physical, magical, summons, and special mechanics for dynamic combat encounters.</p>
+    <p lang="es">Esta sección explica cómo configurar ataques de jefes en attacks.yml, definiendo varios tipos como físicos, mágicos, invocaciones y mecánicas especiales para encuentros de combate dinámicos.</p>
 
-    <!-- Basic Attack Structure -->
+    <!-- Step-by-Step -->
     <div class="step-by-step">
         <div class="step">
-            <h3><span lang="en">1. Attack Fundamentals</span><span lang="es">1. Fundamentos de Ataques</span></h3>
+            <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+            <p lang="en">Attacks are defined under the 'attacks' key with a unique identifier.</p>
+            <p lang="es">Los ataques se definen bajo la clave 'attacks' con un identificador único.</p>
             <div class="code-example">
                 <pre>attacks:
-  attack_id:
-    name: "Attack Name"
-    type: "physical/magical/summon"
-    damage: 20
-    probability: 0.5</pre>
+basic_attack:
+# Attack settings go here</pre>
             </div>
+            <p lang="en"><strong>Explanation:</strong> The <code>attacks</code> key is the root for all attack definitions. Each attack (e.g., <code>basic_attack</code>) is a unique identifier that specifies a boss ability.</p>
+            <p lang="es"><strong>Explicación:</strong> La clave <code>attacks</code> es la raíz de todas las definiciones de ataques. Cada ataque (por ejemplo, <code>basic_attack</code>) es un identificador único que especifica una habilidad del jefe.</p>
+        </div>
+
+        <div class="step">
+            <h3><span lang="en">2. Core Attack Settings</span><span lang="es">2. Configuraciones Básicas de Ataques</span></h3>
+            <p lang="en">Define the attack’s name, type, damage, probability, and cooldown.</p>
+            <p lang="es">Define el nombre, tipo, daño, probabilidad y enfriamiento del ataque.</p>
+            <div class="code-example">
+                <pre>basic_attack:
+name: "Basic Attack"
+type: "physical"
+damage: 20
+probability: 0.8
+cooldown: 2
+targets: "RANDOM"</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>name: "Basic Attack"</code>: Display name of the attack.</li>
+                    <li><code>type: "physical"</code>: Attack type (e.g., physical, magical, summon, heal, enclose, combo).</li>
+                    <li><code>damage: 20</code>: Damage dealt in health points (half-hearts).</li>
+                    <li><code>probability: 0.8</code>: Chance of use (0.0 to 1.0; 0.8 = 80%).</li>
+                    <li><code>cooldown: 2</code>: Delay in seconds before reuse.</li>
+                    <li><code>targets: "RANDOM"</code>: Target selection (e.g., RANDOM, ALL, NEARBY-LOCK).</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>name: "Basic Attack"</code>: Nombre visible del ataque.</li>
+                    <li><code>type: "physical"</code>: Tipo de ataque (por ejemplo, physical, magical, summon, heal, enclose, combo).</li>
+                    <li><code>damage: 20</code>: Daño infligido en puntos de salud (medios corazones).</li>
+                    <li><code>probability: 0.8</code>: Probabilidad de uso (0.0 a 1.0; 0.8 = 80%).</li>
+                    <li><code>cooldown: 2</code>: Retraso en segundos antes de reutilizar.</li>
+                    <li><code>targets: "RANDOM"</code>: Selección de objetivos (por ejemplo, RANDOM, ALL, NEARBY-LOCK).</li>
+                </ul>
+            </p>
         </div>
     </div>
 
-    <!-- Attack Types Collapsibles -->
+    <!-- Advanced Configurations -->
     <div class="config-block">
-        <button class="collapsible"><span lang="en">▸ Physical Attacks</span><span lang="es">▸ Ataques Físicos</span></button>
+        <button class="collapsible"><span lang="en">▸ Attack Types</span><span lang="es">▸ Tipos de Ataques</span></button>
         <div class="content">
+            <p lang="en">Examples of different attack types and their unique properties.</p>
+            <p lang="es">Ejemplos de diferentes tipos de ataques y sus propiedades únicas.</p>
             <div class="code-example">
-                <pre>earthquake:
-  name: "Earthquake"
-  type: "physical"
-  damage: 25
-  probability: 0.5
-  targets: "ALL"
-  knockback: 2
-  visual_effects:
-    particle: "BLOCK_CRACK"
-    sound: "ENTITY_GENERIC_EXPLODE"</pre>
+                <pre># Magical Attack
+magical:
+name: "Magical Blast"
+type: "magical"
+damage: 35
+probability: 0.5
+effect_id: 2
+amplifier: 1
+users: "C"
+duration_ticks: 20
+cooldown: 5
+area_of_effect:
+radius: 5
+shape: "CIRCLE"
+
+# Summon Attack
+special_attack:
+name: "Summon Minions"
+type: "summon"
+probability: 0.5
+type_Mob: ZOMBIE
+amount: 3
+tag: "minion"
+attack-damage: 30
+movement-speed: 60
+health: 50
+spawn-message: "A magical portal appears, summoning allies!"
+spawn-effects:
+particle: "PORTAL"
+sound: "ENTITY_ZOMBIE_AMBIENT"
+cooldown: 10
+
+# Combo Attack
+advanced_special:
+name: "Elemental Fury"
+type: "combo"
+probability: 0.3
+combo_attacks:
+- basic_attack
+- magical
+- trap_attack
+combo_message: "The boss unleashes its ultimate fury!"
+cooldown: 20</pre>
             </div>
-            <p><span lang="en">Key parameters: knockback, targets (ALL/RANDOM)</span>
-               <span lang="es">Parámetros clave: knockback, targets (ALL/RANDOM)</span></p>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>magical</code>: Applies a potion effect (ID 2 = Slowness) in a circular area; <code>users: "C"</code> targets nearby players.</li>
+                    <li><code>special_attack</code>: Summons 3 zombies with custom stats and effects.</li>
+                    <li><code>advanced_special</code>: Chains multiple attacks into a combo with a custom message.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>magical</code>: Aplica un efecto de poción (ID 2 = Lentitud) en un área circular; <code>users: "C"</code> apunta a jugadores cercanos.</li>
+                    <li><code>special_attack</code>: Invoca 3 zombis con estadísticas y efectos personalizados.</li>
+                    <li><code>advanced_special</code>: Encadena múltiples ataques en un combo con un mensaje personalizado.</li>
+                </ul>
+            </p>
         </div>
 
-        <button class="collapsible"><span lang="en">▸ Magical Attacks</span><span lang="es">▸ Ataques Mágicos</span></button>
+        <button class="collapsible"><span lang="en">▸ Example Attacks</span><span lang="es">▸ Ejemplos de Ataques</span></button>
         <div class="content">
+            <p lang="en">Complete examples of advanced attacks.</p>
+            <p lang="es">Ejemplos completos de ataques avanzados.</p>
             <div class="code-example">
-                <pre>fire_breath:
-  type: "magical"
-  damage: 40
-  effect_id: 12
-  amplifier: 2
-  area_of_effect:
-    radius: 6
-    shape: "CONE"</pre>
-            </div>
-            <p><span lang="en">Essential: effect_id (Potion IDs), shape (CIRCLE/CONE)</span>
-               <span lang="es">Esencial: effect_id (IDs de poción), shape (CIRCLE/CONE)</span></p>
-        </div>
+                <pre># Fire Breath
+fire_breath:
+name: "Fire Breath"
+type: "magical"
+damage: 40
+probability: 0.4
+effect_id: 12
+amplifier: 2
+users: "C"
+duration_ticks: 40
+cooldown: 8
+area_of_effect:
+radius: 6
+shape: "CONE"
 
-        <button class="collapsible"><span lang="en">▸ Summon Attacks</span><span lang="es">▸ Invocaciones</span></button>
-        <div class="content">
-            <div class="code-example">
-                <pre>shadow_clone:
-  type: "summon"
-  type_Mob: WITHER_SKELETON
-  amount: 2
-  spawn-effects:
-    particle: "SMOKE_LARGE"
-    sound: "ENTITY_ENDERMAN_TELEPORT"</pre>
+# Meteor Shower
+meteor_shower:
+name: "Meteor Shower"
+type: "magical"
+damage: 60
+probability: 0.2
+effect_id: 4
+amplifier: 2
+users: "ALL"
+duration_ticks: 30
+cooldown: 25
+visual_effects:
+particle: "LAVA"
+sound: "ENTITY_GHAST_SCREAM"
+area_of_effect:
+radius: 8
+shape: "CIRCLE"
+
+# Shadow Clone
+shadow_clone:
+name: "Shadow Clone"
+type: "summon"
+probability: 0.4
+type_Mob: WITHER_SKELETON
+amount: 2
+tag: "shadow_clone"
+attack-damage: 20
+movement-speed: 70
+health: 40
+spawn-message: "The boss creates shadow clones!"
+spawn-effects:
+particle: "SMOKE_LARGE"
+sound: "ENTITY_ENDERMAN_TELEPORT"
+cooldown: 18</pre>
             </div>
-            <p><span lang="en">Required: type_Mob (Minecraft entity name)</span>
-               <span lang="es">Requerido: type_Mob (nombre de entidad)</span></p>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>fire_breath</code>: A conical fire attack with burning effect (ID 12) for 40 ticks (2 seconds).</li>
+                    <li><code>meteor_shower</code>: High-damage area attack with slowness (ID 4) and dramatic visuals.</li>
+                    <li><code>shadow_clone</code>: Summons fast, durable wither skeletons with teleport effects.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>fire_breath</code>: Un ataque de fuego cónico con efecto de quema (ID 12) durante 40 ticks (2 segundos).</li>
+                    <li><code>meteor_shower</code>: Ataque de área de alto daño con lentitud (ID 4) y efectos visuales dramáticos.</li>
+                    <li><code>shadow_clone</code>: Invoca esqueletos wither rápidos y duraderos con efectos de teletransporte.</li>
+                </ul>
+            </p>
         </div>
     </div>
 
-    <!-- Special Mechanics -->
-    <div class="config-block">
-        <h3><span lang="en">Special Combat Mechanics</span><span lang="es">Mecánicas Especiales</span></h3>
-        <div class="code-example">
-            <pre>advanced_special:
-  type: "combo"
-  combo_attacks:
-    - basic_attack
-    - magical
-  combo_message: "Ultimate combination attack!"
-
-healing:
-  type: "heal"
-  heal_amount: 50
-  visual_effects:
-    particle: "HEART"</pre>
-        </div>
-    </div>
-
-    <!-- Visual Effects Guide -->
+    <!-- Tips and Common Errors -->
     <div class="step">
-        <h3><span lang="en">🎨 Visual Effects Reference</span><span lang="es">🎨 Referencia de Efectos</span></h3>
-        <div class="code-example">
-            <pre># Particle types: 
-# FLAME, LAVA, HEART, PORTAL, CRIT
-
-# Sound effects: 
-# ENTITY_ENDER_DRAGON_GROWL
-# BLOCK_ANVIL_LAND</pre>
-        </div>
-    </div>
-
-    <!-- Common Errors -->
-    <div class="step">
-        <h3><span lang="en">⚠️ Frequent Configuration Errors</span><span lang="es">⚠️ Errores Frecuentes</span></h3>
+        <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
         <ul>
-            <li><span lang="en">Invalid effect_id: Use correct potion IDs (1-32)</span>
-                <span lang="es">effect_id inválido: Usar IDs de poción correctos</span></li>
-            <li><span lang="en">Missing cooldown: Can cause attack spamming</span>
-                <span lang="es">Falta cooldown: Provoca spam de ataques</span></li>
-            <li><span lang="en">Wrong mob-type: Verify entity names (case-sensitive)</span>
-                <span lang="es">Mob-type incorrecto: Nombres son sensibles a mayúsculas</span></li>
+            <li lang="en">Use valid Minecraft potion effect IDs for <code>effect_id</code> (see linked reference).</li>
+            <li lang="es">Usa IDs de efectos de poción válidos de Minecraft para <code>effect_id</code> (ver referencia enlazada).</li>
+            <li lang="en">Ensure <code>type_Mob</code> matches Minecraft entity names (e.g., ZOMBIE, WITHER_SKELETON).</li>
+            <li lang="es">Asegúrate de que <code>type_Mob</code> coincida con nombres de entidades de Minecraft (por ejemplo, ZOMBIE, WITHER_SKELETON).</li>
+            <li lang="en">Balance <code>probability</code> and <code>cooldown</code> to avoid overwhelming players.</li>
+            <li lang="es">Equilibra <code>probability</code> y <code>cooldown</code> para no abrumar a los jugadores.</li>
         </ul>
     </div>
 </section>
 
+<!-- Particles Configuration Section - New Addition -->
+<section id="particles-config" class="section" style="display:none;">
+    <h2><span lang="en">Particles Configuration</span><span lang="es">Configuración de Partículas</span></h2>
+    
+    <!-- Introduction -->
+    <p lang="en">This section explains how to configure particle effects in particles.yml, used for visual animations in boss encounters or other events, with detailed control over appearance, physics, and behavior.</p>
+    <p lang="es">Esta sección explica cómo configurar efectos de partículas en particles.yml, utilizados para animaciones visuales en encuentros con jefes u otros eventos, con control detallado sobre apariencia, física y comportamiento.</p>
 
+    <!-- Step-by-Step -->
+    <div class="step-by-step">
+        <div class="step">
+            <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+            <p lang="en">Particles are defined under the 'particles' key with a unique identifier.</p>
+            <p lang="es">Las partículas se definen bajo la clave 'particles' con un identificador único.</p>
+            <div class="code-example">
+                <pre>particles:
+explosion:
+# Particle settings go here</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong> The <code>particles</code> key is the root for all particle effect definitions. Each particle (e.g., <code>explosion</code>) is a unique identifier that specifies a visual effect.</p>
+            <p lang="es"><strong>Explicación:</strong> La clave <code>particles</code> es la raíz de todas las definiciones de efectos de partículas. Cada partícula (por ejemplo, <code>explosion</code>) es un identificador único que especifica un efecto visual.</p>
+        </div>
+
+        <div class="step">
+            <h3><span lang="en">2. Core Particle Settings</span><span lang="es">2. Configuraciones Básicas de Partículas</span></h3>
+            <p lang="en">Define the particle type, size, color, and basic physics.</p>
+            <p lang="es">Define el tipo de partícula, tamaño, color y física básica.</p>
+            <div class="code-example">
+                <pre>explosion:
+type: "EXPLOSION_LARGE"
+basic_properties:
+size: 1.5
+color:
+red: 255
+green: 50
+blue: 50
+alpha: 255
+physics:
+gravity: 0.0
+lifespan: 8
+velocity:
+x: 4.0
+y: 4.0
+z: 4.0
+acceleration:
+x: 0.0
+y: 0.0
+z: 0.0</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>type: "EXPLOSION_LARGE"</code>: Minecraft particle type (e.g., EXPLOSION_LARGE, CLOUD).</li>
+                    <li><code>basic_properties</code>: Visual attributes.</li>
+                    <li><code>size: 1.5</code>: Particle size multiplier (affects visibility).</li>
+                    <li><code>color</code>: RGBA values (0-255); here, a bright red with full opacity.</li>
+                    <li><code>physics</code>: Movement behavior.</li>
+                    <li><code>gravity: 0.0</code>: No downward force (particles float).</li>
+                    <li><code>lifespan: 8</code>: Duration in ticks (8 ticks ≈ 0.4 seconds).</li>
+                    <li><code>velocity</code>: Initial speed in blocks/tick (x, y, z directions).</li>
+                    <li><code>acceleration</code>: Change in speed over time (here, none).</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>type: "EXPLOSION_LARGE"</code>: Tipo de partícula de Minecraft (por ejemplo, EXPLOSION_LARGE, CLOUD).</li>
+                    <li><code>basic_properties</code>: Atributos visuales.</li>
+                    <li><code>size: 1.5</code>: Multiplicador de tamaño de la partícula (afecta la visibilidad).</li>
+                    <li><code>color</code>: Valores RGBA (0-255); aquí, un rojo brillante con opacidad total.</li>
+                    <li><code>physics</code>: Comportamiento de movimiento.</li>
+                    <li><code>gravity: 0.0</code>: Sin fuerza hacia abajo (las partículas flotan).</li>
+                    <li><code>lifespan: 8</code>: Duración en ticks (8 ticks ≈ 0.4 segundos).</li>
+                    <li><code>velocity</code>: Velocidad inicial en bloques/tick (direcciones x, y, z).</li>
+                    <li><code>acceleration</code>: Cambio de velocidad con el tiempo (aquí, ninguno).</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Advanced Configurations -->
+    <div class="config-block">
+        <button class="collapsible"><span lang="en">▸ Animations</span><span lang="es">▸ Animaciones</span></button>
+        <div class="content">
+            <p lang="en">Configure animations that change particle properties over time.</p>
+            <p lang="es">Configura animaciones que cambian las propiedades de las partículas con el tiempo.</p>
+            <div class="code-example">
+                <pre>animations:
+scale_over_lifetime:
+enabled: true
+start_scale: 1.0
+end_scale: 3.0
+color_over_lifetime:
+enabled: true
+start_color:
+red: 255
+green: 50
+blue: 50
+alpha: 255
+end_color:
+red: 255
+green: 255
+blue: 255
+alpha: 0
+rotation_over_lifetime:
+enabled: true
+start_rotation: 0.0
+end_rotation: 360.0</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>scale_over_lifetime</code>: Changes size; starts at 1x, grows to 3x.</li>
+                    <li><code>color_over_lifetime</code>: Transitions color; starts red, fades to white and transparent.</li>
+                    <li><code>rotation_over_lifetime</code>: Rotates particles; spins from 0° to 360°.</li>
+                    <li><code>enabled: true</code>: Activates each animation; set to false to disable.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>scale_over_lifetime</code>: Cambia el tamaño; comienza en 1x, crece a 3x.</li>
+                    <li><code>color_over_lifetime</code>: Transiciona el color; comienza rojo, se desvanece a blanco y transparente.</li>
+                    <li><code>rotation_over_lifetime</code>: Rota las partículas; gira de 0° a 360°.</li>
+                    <li><code>enabled: true</code>: Activa cada animación; establece en false para desactivar.</li>
+                </ul>
+            </p>
+        </div>
+
+        <button class="collapsible"><span lang="en">▸ Emission and Shape</span><span lang="es">▸ Emisión y Forma</span></button>
+        <div class="content">
+            <p lang="en">Controls how particles are emitted and their spawn shape.</p>
+            <p lang="es">Controla cómo se emiten las partículas y su forma de aparición.</p>
+            <div class="code-example">
+                <pre>emission:
+rate: 150
+burst:
+enabled: true
+count: 80
+interval: 0.8
+emitter_shape:
+type: "sphere"
+radius: 1.5</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>rate: 150</code>: Particles emitted per second (continuous emission).</li>
+                    <li><code>burst</code>: Sudden emission; 80 particles every 0.8 seconds when enabled.</li>
+                    <li><code>emitter_shape</code>: Spawn area; "sphere" with a 1.5-block radius.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>rate: 150</code>: Partículas emitidas por segundo (emisión continua).</li>
+                    <li><code>burst</code>: Emisión repentina; 80 partículas cada 0.8 segundos cuando está habilitado.</li>
+                    <li><code>emitter_shape</code>: Área de aparición; "sphere" con un radio de 1.5 bloques.</li>
+                </ul>
+            </p>
+        </div>
+
+        <button class="collapsible"><span lang="en">▸ Example Particles</span><span lang="es">▸ Ejemplos de Partículas</span></button>
+        <div class="content">
+            <p lang="en">Complete examples of different particle effects.</p>
+            <p lang="es">Ejemplos completos de diferentes efectos de partículas.</p>
+            <div class="code-example">
+                <pre># Reverse Explosion
+reverse_explosion:
+type: "EXPLOSION_LARGE"
+basic_properties:
+size: 1.0
+color:
+red: 100
+green: 100
+blue: 255
+alpha: 255
+physics:
+gravity: 0.0
+lifespan: 8
+velocity:
+x: -4.0
+y: -4.0
+z: -4.0
+animations:
+scale_over_lifetime:
+enabled: true
+start_scale: 2.0
+end_scale: 0.5
+color_over_lifetime:
+enabled: true
+start_color:
+red: 100
+green: 100
+blue: 255
+alpha: 255
+end_color:
+red: 255
+green: 255
+blue: 255
+alpha: 0
+
+# Left Wing (from wings)
+wings:
+left_wing:
+type: "CLOUD"
+basic_properties:
+size: 0.2
+color:
+red: 255
+green: 255
+blue: 255
+alpha: 200
+physics:
+gravity: 0.0
+lifespan: 20
+velocity:
+x: -0.1
+y: 0.5
+z: 0.0
+emission:
+rate: 25
+emitter_shape:
+type: "line"
+length: 1.0
+angle: 45.0</pre>
+            </div>
+            <p lang="en"><strong>Explanation:</strong>
+                <ul>
+                    <li><code>reverse_explosion</code>: An inward-moving explosion; starts blue, shrinks, and fades to white.</li>
+                    <li><code>wings.left_wing</code>: Part of a wing effect; small white clouds move left and up in a line, simulating a flapping motion.</li>
+                    <li>These examples show dynamic effects for dramatic or thematic visuals.</li>
+                </ul>
+            </p>
+            <p lang="es"><strong>Explicación:</strong>
+                <ul>
+                    <li><code>reverse_explosion</code>: Una explosión que se mueve hacia adentro; comienza azul, se encoge y se desvanece a blanco.</li>
+                    <li><code>wings.left_wing</code>: Parte de un efecto de ala; pequeñas nubes blancas se mueven a la izquierda y hacia arriba en una línea, simulando un aleteo.</li>
+                    <li>Estos ejemplos muestran efectos dinámicos para visuales dramáticos o temáticos.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- Tips and Common Errors -->
+    <div class="step">
+        <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
+        <ul>
+            <li lang="en">Use valid Minecraft particle types for <code>type</code> (e.g., <code>EXPLOSION_LARGE</code>, <code>CLOUD</code>).</li>
+            <li lang="es">Usa tipos de partículas válidos de Minecraft para <code>type</code> (por ejemplo, <code>EXPLOSION_LARGE</code>, <code>CLOUD</code>).</li>
+            <li lang="en">Keep <code>lifespan</code> and <code>rate</code> balanced to avoid lag (e.g., high rate + long lifespan = many particles).</li>
+            <li lang="es">Mantén <code>lifespan</code> y <code>rate</code> equilibrados para evitar lag (por ejemplo, alta tasa + larga duración = muchas partículas).</li>
+            <li lang="en">Test animations in-game; some effects may not render as expected.</li>
+            <li lang="es">Prueba las animaciones en el juego; algunos efectos pueden no renderizarse como se espera.</li>
+        </ul>
+    </div>
+</section>
         <!-- Add other sections following the same pattern -->
+      <!-- Structures Configuration Section - New Addition -->
+      <section id="structures-config" class="section" style="display:none;">
+        <h2><span lang="en">Structures Configuration</span><span lang="es">Configuración de Estructuras</span></h2>
         
+        <!-- Introduction -->
+        <p lang="en">This section explains how to configure temporary structures in structures.yml, used during boss encounters or events, with customizable blocks, effects, and removal behaviors.</p>
+        <p lang="es">Esta sección explica cómo configurar estructuras temporales en structures.yml, utilizadas durante encuentros con jefes o eventos, con bloques, efectos y comportamientos de eliminación personalizables.</p>
+
+        <!-- Step-by-Step -->
+        <div class="step-by-step">
+            <div class="step">
+                <h3><span lang="en">1. Basic Structure</span><span lang="es">1. Estructura Básica</span></h3>
+                <p lang="en">Structures are defined under the 'Structures' key with a unique identifier.</p>
+                <p lang="es">Las estructuras se definen bajo la clave 'Structures' con un identificador único.</p>
+                <div class="code-example">
+                    <pre>Structures:
+MiEstructura:
+# Structure settings go here</pre>
+                </div>
+                <p lang="en"><strong>Explanation:</strong> The <code>Structures</code> key is the root for all structure definitions. Each structure (e.g., <code>MiEstructura</code>) is a unique identifier that specifies a temporary build.</p>
+                <p lang="es"><strong>Explicación:</strong> La clave <code>Structures</code> es la raíz de todas las definiciones de estructuras. Cada estructura (por ejemplo, <code>MiEstructura</code>) es un identificador único que especifica una construcción temporal.</p>
+            </div>
+
+            <div class="step">
+                <h3><span lang="en">2. Core Structure Settings</span><span lang="es">2. Configuraciones Básicas de Estructuras</span></h3>
+                <p lang="en">Define the removal time, effects, and block replacement behavior.</p>
+                <p lang="es">Define el tiempo de eliminación, efectos y comportamiento de reemplazo de bloques.</p>
+                <div class="code-example">
+                    <pre>MiEstructura:
+Time_Remove: 100
+effects_on_build:
+enabled: true
+particle: "CRIT_MAGIC"
+sound: "BLOCK_ANVIL_PLACE"
+effects_on_remove:
+enabled: true
+particle: "SMOKE_LARGE"
+sound: "BLOCK_ANVIL_BREAK"
+replacement_behavior:
+replace_existing: true
+drop_items: false</pre>
+                </div>
+                <p lang="en"><strong>Explanation:</strong>
+                    <ul>
+                        <li><code>Time_Remove: 100</code>: Duration in milliseconds (100 ms = 0.1 seconds) before the structure is removed.</li>
+                        <li><code>effects_on_build</code>: Visual/audio effects when built; uses magic crit particles and anvil placement sound.</li>
+                        <li><code>effects_on_remove</code>: Effects when removed; uses large smoke and anvil break sound.</li>
+                        <li><code>replacement_behavior</code>: Controls interaction with existing blocks.</li>
+                        <li><code>replace_existing: true</code>: Overwrites existing blocks.</li>
+                        <li><code>drop_items: false</code>: Replaced blocks don’t drop as items.</li>
+                    </ul>
+                </p>
+                <p lang="es"><strong>Explicación:</strong>
+                    <ul>
+                        <li><code>Time_Remove: 100</code>: Duración en milisegundos (100 ms = 0.1 segundos) antes de que la estructura sea eliminada.</li>
+                        <li><code>effects_on_build</code>: Efectos visuales/auditivos al construirse; usa partículas de crítico mágico y sonido de colocación de yunque.</li>
+                        <li><code>effects_on_remove</code>: Efectos al eliminarse; usa humo grande y sonido de rotura de yunque.</li>
+                        <li><code>replacement_behavior</code>: Controla la interacción con bloques existentes.</li>
+                        <li><code>replace_existing: true</code>: Sobrescribe bloques existentes.</li>
+                        <li><code>drop_items: false</code>: Los bloques reemplazados no se dropean como ítems.</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="step">
+                <h3><span lang="en">3. Defining Blocks</span><span lang="es">3. Definiendo Bloques</span></h3>
+                <p lang="en">List the blocks and their relative coordinates.</p>
+                <p lang="es">Lista los bloques y sus coordenadas relativas.</p>
+                <div class="code-example">
+                    <pre>blocks:
+- iron_block 0,0,0
+- iron_block 1,0,0
+- iron_block -1,0,0
+- iron_bars 1,1,0
+- iron_bars -1,1,0</pre>
+                </div>
+                <p lang="en"><strong>Explanation:</strong>
+                    <ul>
+                        <li><code>blocks</code>: List of block types and positions.</li>
+                        <li>Format: <code>[block_type] x,y,z</code>, where coordinates are relative to the structure’s origin (e.g., boss location).</li>
+                        <li>Example: <code>iron_block 0,0,0</code> places an iron block at the origin; <code>iron_bars 1,1,0</code> places iron bars 1 block east and 1 block up.</li>
+                    </ul>
+                </p>
+                <p lang="es"><strong>Explicación:</strong>
+                    <ul>
+                        <li><code>blocks</code>: Lista de tipos de bloques y posiciones.</li>
+                        <li>Formato: <code>[tipo_bloque] x,y,z</code>, donde las coordenadas son relativas al origen de la estructura (por ejemplo, ubicación del jefe).</li>
+                        <li>Ejemplo: <code>iron_block 0,0,0</code> coloca un bloque de hierro en el origen; <code>iron_bars 1,1,0</code> coloca barras de hierro 1 bloque al este y 1 bloque arriba.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Advanced Configurations -->
+        <div class="config-block">
+            <button class="collapsible"><span lang="en">▸ Example Structure</span><span lang="es">▸ Ejemplo de Estructura</span></button>
+            <div class="content">
+                <p lang="en">A complete example of a more advanced structure.</p>
+                <p lang="es">Un ejemplo completo de una estructura más avanzada.</p>
+                <div class="code-example">
+                    <pre>AdvancedStructure:
+Time_Remove: 500
+effects_on_build:
+enabled: true
+particle: "END_ROD"
+sound: "BLOCK_NOTE_BLOCK_PLING"
+effects_on_remove:
+enabled: true
+particle: "CLOUD"
+sound: "BLOCK_GLASS_BREAK"
+replacement_behavior:
+replace_existing: false
+drop_items: true
+blocks:
+- diamond_block 0,0,0
+- diamond_block 1,0,0
+- diamond_block -1,0,0
+- diamond_block 0,0,1
+- diamond_block 0,0,-1
+- glass 1,1,0
+- glass -1,1,0
+- glass 0,1,1
+- glass 0,1,-1
+- glass 1,2,0
+- glass -1,2,0
+- glass 0,2,1
+- glass 0,2,-1
+- emerald_block 0,3,0
+- emerald_block 1,3,0
+- emerald_block -1,3,0
+- emerald_block 0,3,1
+- emerald_block 0,3,-1</pre>
+                </div>
+                <p lang="en"><strong>Explanation:</strong>
+                    <ul>
+                        <li><code>Time_Remove: 500</code>: Lasts 0.5 seconds before removal.</li>
+                        <li><code>effects_on_build</code>: Uses end rod particles and a pling sound for a mystical build effect.</li>
+                        <li><code>effects_on_remove</code>: Clouds and glass breaking signal its disappearance.</li>
+                        <li><code>replacement_behavior</code>: Preserves existing blocks and drops items from destroyed ones.</li>
+                        <li><code>blocks</code>: Creates a diamond floor, glass walls, and emerald ceiling for a luxurious temporary structure.</li>
+                    </ul>
+                </p>
+                <p lang="es"><strong>Explicación:</strong>
+                    <ul>
+                        <li><code>Time_Remove: 500</code>: Dura 0.5 segundos antes de eliminarse.</li>
+                        <li><code>effects_on_build</code>: Usa partículas de varilla de fin y un sonido de pling para un efecto de construcción místico.</li>
+                        <li><code>effects_on_remove</code>: Nubes y rotura de vidrio señalan su desaparición.</li>
+                        <li><code>replacement_behavior</code>: Preserva bloques existentes y dropea ítems de los destruidos.</li>
+                        <li><code>blocks</code>: Crea un suelo de diamante, paredes de vidrio y techo de esmeralda para una estructura temporal lujosa.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Tips and Common Errors -->
+        <div class="step">
+            <h3><span lang="en">⚠️ Tips & Common Errors</span><span lang="es">⚠️ Consejos y Errores Comunes</span></h3>
+            <ul>
+                <li lang="en">Use valid Minecraft block names (e.g., <code>iron_block</code>, <code>glass</code>) in <code>blocks</code>.</li>
+                <li lang="es">Usa nombres de bloques válidos de Minecraft (por ejemplo, <code>iron_block</code>, <code>glass</code>) en <code>blocks</code>.</li>
+                <li lang="en">Keep <code>Time_Remove</code> reasonable (in milliseconds) to match gameplay pacing.</li>
+                <li lang="es">Mantén <code>Time_Remove</code> razonable (en milisegundos) para ajustarse al ritmo del juego.</li>
+                <li lang="en">Test particle and sound effects in-game; some may be temporarily disabled as noted.</li>
+                <li lang="es">Prueba los efectos de partículas y sonidos en el juego; algunos pueden estar deshabilitados temporalmente como se indica.</li>
+            </ul>
+        </div>
+    </section>  
     </div>
 
     <script>
