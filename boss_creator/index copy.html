@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Boss YAML</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-md">
+    <h1 class="text-2xl font-bold mb-4">Generador de Boss Completo</h1>
+    <form id="boss-form" class="space-y-6">
+      <!-- Campo clave para el ID del boss -->
+      <label class="block">
+        <span>ID único (clave YAML):</span>
+        <input name="key" type="text" required placeholder="ejemplo_boss" class="mt-1 block w-full border rounded p-2" />
+      </label>
+      <div class="grid grid-cols-2 gap-4">
+        <label class="block">
+          <span>boss-id:</span>
+          <input name="boss-id" type="text" required class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>level:</span>
+          <input name="level" type="number" min="1" value="1" class="mt-1 block w-full border rounded p-2" />
+        </label>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <label class="inline-flex items-center">
+          <input name="enabled" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
+          <span class="ml-2">enabled</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input name="fire_damage" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
+          <span class="ml-2">fire_damage</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input name="custom-ai" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
+          <span class="ml-2">custom-ai</span>
+        </label>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <label class="block">
+          <span>allowBossRespawn:</span>
+          <input name="allowBossRespawn" type="checkbox" class="mt-1 form-checkbox h-5 w-5 text-blue-600" />
+        </label>
+        <label class="block">
+          <span>MaxRespawn:</span>
+          <input name="MaxRespawn" type="number" min="0" value="1" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>respawnInterval:</span>
+          <input name="respawnInterval" type="number" min="0" value="1800" class="mt-1 block w-full border rounded p-2" />
+        </label>
+      </div>
+      <label class="block">
+        <span>RespawnMessages (línea por mensaje):</span>
+        <textarea name="RespawnMessages" rows="2" class="mt-1 block w-full border rounded p-2"></textarea>
+      </label>
+      <div class="grid grid-cols-2 gap-4">
+        <label class="block">
+          <span>activespawnInterval:</span>
+          <input name="activespawnInterval" type="checkbox" class="mt-1 form-checkbox h-5 w-5 text-blue-600" />
+        </label>
+        <label class="block">
+          <span>spawnInterval:</span>
+          <input name="spawnInterval" type="number" min="0" value="1000" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>spawnZone (custom):</span>
+          <input name="spawnZone" type="checkbox" class="mt-1 form-checkbox h-5 w-5 text-blue-600" />
+        </label>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <label class="block">
+          <span>spawn-message:</span>
+          <input name="spawn-message" type="text" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>spawn-sound:</span>
+          <input name="spawn-sound" type="text" class="mt-1 block w-full border rounded p-2" />
+        </label>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <label class="block">
+          <span>mob-type:</span>
+          <input name="mob-type" type="text" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>display-name:</span>
+          <input name="display-name" type="text" class="mt-1 block w-full border rounded p-2" />
+        </label>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <label class="block">
+          <span>attack-damage:</span>
+          <input name="attack-damage" type="number" min="0" value="10" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>health:</span>
+          <input name="health" type="number" min="1" value="100" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>movement-speed:</span>
+          <input name="movement-speed" type="number" step="0.01" value="0.2" class="mt-1 block w-full border rounded p-2" />
+        </label>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <label class="inline-flex items-center">
+          <input name="enable-equipment" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
+          <span class="ml-2">enable-equipment</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input name="attack" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" />
+          <span class="ml-2">attack (default)</span>
+        </label>
+      </div>
+      <label class="block">
+        <span>bossRespawnMessage:</span>
+        <input name="bossRespawnMessage" type="text" class="mt-1 block w-full border rounded p-2" />
+      </label>
+      <label class="block">
+        <span>Trigger on_defeat:</span>
+        <input name="triggers.on_defeat" type="text" class="mt-1 block w-full border rounded p-2" />
+      </label>
+      <div class="grid grid-cols-2 gap-4">
+        <label class="block">
+          <span>particles_options.active:</span>
+          <input name="particles.active" type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 mt-1" />
+        </label>
+        <label class="block">
+          <span>Particle event:</span>
+          <input name="particles.event" type="text" class="mt-1 block w-full border rounded p-2" placeholder="spawn/death/attack" />
+        </label>
+        <label class="block">
+          <span>Particle type:</span>
+          <input name="particles.particle" type="text" class="mt-1 block w-full border rounded p-2" />
+        </label>
+      </div>
+      <label class="block">
+        <span>Attacks (línea por ataque):</span>
+        <textarea name="attacks" rows="2" class="mt-1 block w-full border rounded p-2"></textarea>
+      </label>
+      <div class="grid grid-cols-4 gap-4">
+        <label class="block">
+          <span>World:</span>
+          <input name="location.world" type="text" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>X:</span>
+          <input name="location.x" type="number" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>Y:</span>
+          <input name="location.y" type="number" class="mt-1 block w-full border rounded p-2" />
+        </label>
+        <label class="block">
+          <span>Z:</span>
+          <input name="location.z" type="number" class="mt-1 block w-full border rounded p-2" />
+        </label>
+      </div>
+      <fieldset class="border p-4 rounded">
+        <legend class="font-semibold">Equipment</legend>
+        <div class="grid grid-cols-3 gap-4">
+          <label class="block"><span>Main-hand:</span><input name="equipment.main-hand" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+          <label class="block"><span>Off-hand:</span><input name="equipment.off-hand" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+          <label class="block"><span>Helmet:</span><input name="equipment.helmet" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+          <label class="block"><span>Chestplate:</span><input name="equipment.chestplate" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+          <label class="block"><span>Leggings:</span><input name="equipment.leggings" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+          <label class="block"><span>Boots:</span><input name="equipment.boots" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+        </div>
+      </fieldset>
+      <fieldset class="border p-4 rounded">
+        <legend class="font-semibold">Rewards</legend>
+        <div class="space-y-4">
+          <div class="grid grid-cols-4 gap-4 bg-gray-50 p-2 rounded">
+            <span class="col-span-4 font-semibold">top_1</span>
+            <label class="block col-span-2"><span>Type:</span><input name="rewards.top_1.type" type="text" class="mt-1 block w-full border rounded p-2" placeholder="item/itemgroup/command" /></label>
+            <label class="block col-span-2"><span>Item/Command:</span><input name="rewards.top_1.item" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+            <label class="block col-span-2"><span>Amount:</span><input name="rewards.top_1.amount" type="number" class="mt-1 block w-full border rounded p-2" /></label>
+          </div>
+          <div class="grid grid-cols-4 gap-4 bg-gray-50 p-2 rounded">
+            <span class="col-span-4 font-semibold">top_2</span>
+            <label class="block col-span-2"><span>Type:</span><input name="rewards.top_2.type" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+            <label class="block col-span-2"><span>Item/Command:</span><input name="rewards.top_2.item" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+            <label class="block col-span-2"><span>Amount:</span><input name="rewards.top_2.amount" type="number" class="mt-1 block w-full border rounded p-2" /></label>
+          </div>
+          <div class="grid grid-cols-4 gap-4 bg-gray-50 p-2 rounded">
+            <span class="col-span-4 font-semibold">top_3</span>
+            <label class="block col-span-2"><span>Type:</span><input name="rewards.top_3.type" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+            <label class="block col-span-2"><span>Item/Command:</span><input name="rewards.top_3.item" type="text" class="mt-1 block w-full border rounded p-2" /></label>
+            <label class="block col-span-2"><span>Amount:</span><input name="rewards.top_3.amount" type="number" class="mt-1 block w-full border rounded p-2" /></label>
+          </div>
+        </div>
+      </fieldset>
+      <div class="flex justify-end">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700">Generar YAML</button>
+      </div>
+    </form>
+    <div class="mt-6">
+      <label class="font-semibold">YAML generado:</label>
+      <pre id="output" class="bg-gray-100 p-4 rounded overflow-x-auto"></pre>
+      <a id="download-link" href="#" download="boss.yml" class="mt-2 inline-block text-blue-600 hover:underline">Descargar YAML</a>
+    </div>
+  </div>
+  <script>
+    document.getElementById('boss-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const f = e.target;
+      const key = f.key.value.trim();
+      const getList = name => f[name].value.split('\n').filter(l => l.trim());
+      const boss = {
+        'boss-id': f['boss-id'].value,
+        level: +f.level.value,
+        enabled: f.enabled.checked,
+        fire_damage: f.fire_damage.checked,
+        Skin: f.Skin?.value || '',
+        'custom-ai': f['custom-ai'].checked,
+        allowBossRespawn: f.allowBossRespawn.checked,
+        MaxRespawn: +f.MaxRespawn.value,
+        RespawnMessages: getList('RespawnMessages'),
+        respawnInterval: +f.respawnInterval.value,
+        activespawnInterval: f.activespawnInterval.checked,
+        spawnInterval: +f.spawnInterval.value,
+        spawnZone: f.spawnZone.checked,
+        'spawn-message': f['spawn-message'].value,
+        'spawn-sound': f['spawn-sound'].value,
+        'mob-type': f['mob-type'].value,
+        'display-name': f['display-name'].value,
+        'attack-damage': +f['attack-damage'].value,
+        health: +f.health.value,
+        'movement-speed': +f['movement-speed'].value,
+        'enable-equipment': f['enable-equipment'].checked,
+        attack: f.attack.checked,
+        bossRespawnMessage: f.bossRespawnMessage.value,
+        triggers: { on_defeat: f['triggers.on_defeat'].value },
+        particle: {
+          particles_options: { active: f['particles.active'].checked },
+          particles: {
+            part1: { event: f['particles.event'].value, particle: f['particles.particle'].value }
+          }
+        },
+        attacks: getList('attacks'),
+        location: { world: f['location.world'].value, coordinates: { x: +f['location.x'].value, y: +f['location.y'].value, z: +f['location.z'].value } },
+        equipment: {
+          'main-hand': f['equipment.main-hand'].value,
+          'off-hand': f['equipment.off-hand'].value,
+          helmet: f['equipment.helmet'].value,
+          chestplate: f['equipment.chestplate'].value,
+          leggings: f['equipment.leggings'].value,
+          boots: f['equipment.boots'].value
+        },
+        rewards: {
+          top_1: { reward: { type: f['rewards.top_1.type'].value, ...(f['rewards.top_1.type'].value === 'command' ? { commands: [f['rewards.top_1.item'].value] } : { item: f['rewards.top_1.item'].value, amount: +f['rewards.top_1.amount'].value }) } },
+          top_2: { reward: { type: f['rewards.top_2.type'].value, ...(f['rewards.top_2.type'].value === 'command' ? { commands: [f['rewards.top_2.item'].value] } : { item: f['rewards.top_2.item'].value, amount: +f['rewards.top_2.amount'].value }) } },
+          top_3: { reward: { type: f['rewards.top_3.type'].value, ...(f['rewards.top_3.type'].value === 'command' ? { commands: [f['rewards.top_3.item'].value] } : { item: f['rewards.top_3.item'].value, amount: +f['rewards.top_3.amount'].value }) } }
+        }
+      };
+      const full = { bosses: { [key]: boss } };
+      const yaml = jsyaml.dump(full, { noRefs: true, sortKeys: false });
+      document.getElementById('output').textContent = yaml;
+      const blob = new Blob([yaml], { type: 'text/yaml' });
+      const url = URL.createObjectURL(blob);
+      document.getElementById('download-link').href = url;
+    });
+  </script>
+</body>
+</html>
