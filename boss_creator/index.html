@@ -82,9 +82,43 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #2563eb;
     }
+    .reward-key {
+      background-color: #1f2937;
+      color: #9CA3AF;
+      border: 1px solid #374151;
+      pointer-events: none;
+    }
+    .alert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .alert-success {
+      background-color: #10B981;
+    }
+    .alert-warning {
+      background-color: #F59E0B;
+    }
+    .alert-error {
+      background-color: #EF4444;
+    }
+    .alert-show {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="min-h-screen p-6 font-sans">
+  <!-- Alert Container -->
+  <div id="alert-container"></div>
+
   <div class="max-w-7xl mx-auto relative">
     <!-- Version Switch -->
     <div class="version-switch">
@@ -447,12 +481,12 @@
         </div>
         <div class="p-6">
           <div id="rewards-container" class="space-y-4">
-            <!-- reward template -->
+            <!-- Reward 1 -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-900 p-4 rounded-lg border border-gray-800 items-end">
               <div>
                 <label class="block text-xs font-medium text-gray-400 mb-2">Key</label>
-                <input name="reward-key" type="text" placeholder="top_1" 
-                       class="input-field w-full px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-blue-500">
+                <input type="text" value="top_1" readonly 
+                       class="reward-key w-full px-3 py-2 rounded-md text-sm">
               </div>
               <div>
                 <label class="block text-xs font-medium text-gray-400 mb-2">Type</label>
@@ -460,8 +494,61 @@
                   <option value="item">item</option>
                   <option value="itemgroup">itemgroup</option>
                   <option value="command">command</option>
-                  <!-- Version 4.0.0 specific option -->
-                  <option value="denarius" class="v400-only hidden">denarius</option>
+                  <option value="denarius" class="v410-only">denarius</option>
+                </select>
+              </div>
+              <div class="reward-item">
+                <label class="block text-xs font-medium text-gray-400 mb-2">Item/Group</label>
+                <input type="text" class="input-field w-full px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-blue-500 reward-value">
+              </div>
+              <div class="reward-amount">
+                <label class="block text-xs font-medium text-gray-400 mb-2">Amount</label>
+                <input type="number" min="1" value="1" 
+                       class="input-field w-full px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-blue-500 reward-amount-input">
+              </div>
+            </div>
+            
+            <!-- Reward 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-900 p-4 rounded-lg border border-gray-800 items-end">
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-2">Key</label>
+                <input type="text" value="top_2" readonly 
+                       class="reward-key w-full px-3 py-2 rounded-md text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-2">Type</label>
+                <select class="input-field w-full px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-blue-500 reward-type">
+                  <option value="item">item</option>
+                  <option value="itemgroup">itemgroup</option>
+                  <option value="command">command</option>
+                  <option value="denarius" class="v410-only">denarius</option>
+                </select>
+              </div>
+              <div class="reward-item">
+                <label class="block text-xs font-medium text-gray-400 mb-2">Item/Group</label>
+                <input type="text" class="input-field w-full px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-blue-500 reward-value">
+              </div>
+              <div class="reward-amount">
+                <label class="block text-xs font-medium text-gray-400 mb-2">Amount</label>
+                <input type="number" min="1" value="1" 
+                       class="input-field w-full px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-blue-500 reward-amount-input">
+              </div>
+            </div>
+            
+            <!-- Reward 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-900 p-4 rounded-lg border border-gray-800 items-end">
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-2">Key</label>
+                <input type="text" value="top_3" readonly 
+                       class="reward-key w-full px-3 py-2 rounded-md text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-2">Type</label>
+                <select class="input-field w-full px-3 py-2 rounded-md text-sm focus:ring-2 focus:ring-blue-500 reward-type">
+                  <option value="item">item</option>
+                  <option value="itemgroup">itemgroup</option>
+                  <option value="command">command</option>
+                  <option value="denarius" class="v410-only">denarius</option>
                 </select>
               </div>
               <div class="reward-item">
@@ -475,13 +562,6 @@
               </div>
             </div>
           </div>
-          
-          <button id="add-reward" type="button" class="mt-4 flex items-center text-blue-400 hover:text-blue-300 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-            </svg>
-            Añadir recompensa
-          </button>
         </div>
       </div>
     </div>
@@ -543,21 +623,69 @@
     // Current version (default: 4.1.0)
     let currentVersion = '4.1.0';
     
+    // Show alert function
+    function showAlert(message, type = 'success', duration = 5000) {
+      const alertContainer = document.getElementById('alert-container');
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      alertContainer.appendChild(alert);
+      
+      // Trigger reflow to enable animation
+      void alert.offsetWidth;
+      
+      alert.classList.add('alert-show');
+      
+      // Remove alert after duration
+      setTimeout(() => {
+        alert.classList.remove('alert-show');
+        setTimeout(() => alert.remove(), 300);
+      }, duration);
+    }
+    
+    // Validate form before generating YAML
+    function validateForm() {
+      const key = document.getElementById('key').value.trim();
+      const bossId = document.getElementById('boss-id').value.trim();
+      
+      if (!key || !bossId) {
+        showAlert('Error: Los campos "Clave única YAML" y "boss-id" son obligatorios', 'error');
+        return false;
+      }
+      
+      // Check if any reward has type but no value
+      let rewardError = false;
+      document.querySelectorAll('#rewards-container .grid').forEach(row => {
+        const type = row.querySelector('.reward-type').value;
+        const value = row.querySelector('.reward-value').value.trim();
+        
+        if (type && !value) {
+          rewardError = true;
+        }
+      });
+      
+      if (rewardError) {
+        showAlert('Advertencia: Hay recompensas con tipo seleccionado pero sin valor definido', 'warning');
+      }
+      
+      return true;
+    }
+    
     // Toggle sections based on version
     function toggleVersionFields() {
-  if (currentVersion === '4.0.0') {
-    // Mostrar elementos exclusivos de 4.0.0
-    document.querySelectorAll('.v410-only').forEach(el => el.classList.add('hidden'));
-    // Ocultar elementos exclusivos de 4.1.0
-    document.getElementById('triggers-section').classList.add('hidden');
-  } else {
-    // Ocultar elementos exclusivos de 4.0.0
-    document.querySelectorAll('.v410-only').forEach(el => el.classList.remove('hidden'));
-    // Mostrar elementos exclusivos de 4.1.0
-    document.getElementById('triggers-section').classList.remove('hidden');
-  }
-  document.getElementById('version-badge').textContent = `v${currentVersion}`;
-}
+      if (currentVersion === '4.0.0') {
+        // Mostrar elementos exclusivos de 4.0.0
+        document.querySelectorAll('.v410-only').forEach(el => el.classList.add('hidden'));
+        // Ocultar elementos exclusivos de 4.1.0
+        document.getElementById('triggers-section').classList.add('hidden');
+      } else {
+        // Ocultar elementos exclusivos de 4.0.0
+        document.querySelectorAll('.v410-only').forEach(el => el.classList.remove('hidden'));
+        // Mostrar elementos exclusivos de 4.1.0
+        document.getElementById('triggers-section').classList.remove('hidden');
+      }
+      document.getElementById('version-badge').textContent = `v${currentVersion}`;
+    }
     
     // Initialize version switch
     document.addEventListener('DOMContentLoaded', () => {
@@ -607,15 +735,9 @@
         }
       });
       
-      // Rewards dynamic
+      // Handle reward type changes
       const container = document.getElementById('rewards-container');
       if (container) {
-        document.getElementById('add-reward').addEventListener('click', () => {
-          const tpl = container.firstElementChild.cloneNode(true);
-          tpl.querySelectorAll('input').forEach(i => i.value = '');
-          container.appendChild(tpl);
-        });
-        
         container.addEventListener('change', e => {
           if (e.target.classList.contains('reward-type')) {
             const row = e.target.closest('.grid');
@@ -639,124 +761,138 @@
     });
     
     function generateYAML() {
-      const key = document.getElementById('key').value.trim();
-      const getList = name => document.getElementById(name).value.split('\n').filter(l => l.trim());
-      
-      const location = document.getElementById('spawnZone').checked ? { 
-        world: document.getElementById('loc-world').value, 
-        coordinates: { 
-          x: +document.getElementById('loc-x').value, 
-          y: +document.getElementById('loc-y').value, 
-          z: +document.getElementById('loc-z').value 
-        } 
-      } : { world: 'world', coordinates: { x: 0, y: 0, z: 0 } };
-      
-      // Build boss object based on version
-      const boss = {
-        'boss-id': document.getElementById('boss-id').value,
-        level: +document.getElementById('level').value,
-        enabled: document.getElementById('enabled').checked,
-        fire_damage: document.getElementById('fire_damage').checked,
-        'custom-ai': document.getElementById('custom-ai').checked,
-        attack: document.getElementById('attack').checked,
-        allowBossRespawn: document.getElementById('allowBossRespawn').checked,
-        MaxRespawn: +document.getElementById('MaxRespawn').value,
-        RespawnMessages: getList('RespawnMessages'),
-        respawnInterval: +document.getElementById('respawnInterval').value,
-        activespawnInterval: document.getElementById('activespawnInterval').checked,
-        spawnInterval: +document.getElementById('spawnInterval').value,
-        spawnZone: document.getElementById('spawnZone').checked,
-        'spawn-message': document.getElementById('spawn-message').value,
-        'spawn-sound': document.getElementById('spawn-sound').value,
-        location,
-        'mob-type': document.getElementById('mob-type').value,
-        'display-name': document.getElementById('display-name').value,
-        Skin: document.getElementById('Skin').value,
-        'attack-damage': +document.getElementById('attack-damage').value,
-        health: +document.getElementById('health').value,
-        'movement-speed': +document.getElementById('movement-speed').value,
-        'enable-equipment': document.getElementById('enable-equipment').checked,
-        equipment: document.getElementById('enable-equipment').checked ? {
-          'main-hand': document.getElementById('equip-main-hand').value,
-          'off-hand': document.getElementById('equip-off-hand').value,
-          helmet: document.getElementById('equip-helmet').value,
-          chestplate: document.getElementById('equip-chestplate').value,
-          leggings: document.getElementById('equip-leggings').value,
-          boots: document.getElementById('equip-boots').value
-        } : {},
-        bossRespawnMessage: document.getElementById('bossRespawnMessage').value,
-        particles_options: { active: document.getElementById('particles-active').checked },
-        particles: { 
-          event: document.getElementById('particles-event').value, 
-          particle: document.getElementById('particles-particle').value 
-        },
-        attacks: getList('attacks'),
-        rewards: {} 
-      };
-      
-      // Add version-specific fields
-      if (currentVersion === '4.0.0') {
-        boss.chance = +document.getElementById('chance').value;
-      } else {
-        boss.triggers = {
-          on_defeat: document.getElementById('trigger-defeat').value,
-          on_invoke: document.getElementById('trigger-invoke').value
-        };
+      // Validate form first
+      if (!validateForm()) {
+        return;
       }
       
-      // Process rewards
-      document.querySelectorAll('#rewards-container .grid').forEach(row => {
-        const rkey = row.querySelector('input[name="reward-key"]').value;
-        if (!rkey) return;
+      try {
+        const key = document.getElementById('key').value.trim();
+        const getList = name => document.getElementById(name).value.split('\n').filter(l => l.trim());
         
-        const type = row.querySelector('.reward-type').value;
-        const value = row.querySelector('.reward-value').value;
-        const amount = row.querySelector('.reward-amount-input')?.value;
+        const location = document.getElementById('spawnZone').checked ? { 
+          world: document.getElementById('loc-world').value, 
+          coordinates: { 
+            x: +document.getElementById('loc-x').value, 
+            y: +document.getElementById('loc-y').value, 
+            z: +document.getElementById('loc-z').value 
+          } 
+        } : { world: 'world', coordinates: { x: 0, y: 0, z: 0 } };
         
+        // Build boss object based on version
+        const boss = {
+          'boss-id': document.getElementById('boss-id').value,
+          level: +document.getElementById('level').value,
+          enabled: document.getElementById('enabled').checked,
+          fire_damage: document.getElementById('fire_damage').checked,
+          'custom-ai': document.getElementById('custom-ai').checked,
+          attack: document.getElementById('attack').checked,
+          allowBossRespawn: document.getElementById('allowBossRespawn').checked,
+          MaxRespawn: +document.getElementById('MaxRespawn').value,
+          RespawnMessages: getList('RespawnMessages'),
+          respawnInterval: +document.getElementById('respawnInterval').value,
+          activespawnInterval: document.getElementById('activespawnInterval').checked,
+          spawnInterval: +document.getElementById('spawnInterval').value,
+          spawnZone: document.getElementById('spawnZone').checked,
+          'spawn-message': document.getElementById('spawn-message').value,
+          'spawn-sound': document.getElementById('spawn-sound').value,
+          location,
+          'mob-type': document.getElementById('mob-type').value,
+          'display-name': document.getElementById('display-name').value,
+          Skin: document.getElementById('Skin').value,
+          'attack-damage': +document.getElementById('attack-damage').value,
+          health: +document.getElementById('health').value,
+          'movement-speed': +document.getElementById('movement-speed').value,
+          'enable-equipment': document.getElementById('enable-equipment').checked,
+          equipment: document.getElementById('enable-equipment').checked ? {
+            'main-hand': document.getElementById('equip-main-hand').value,
+            'off-hand': document.getElementById('equip-off-hand').value,
+            helmet: document.getElementById('equip-helmet').value,
+            chestplate: document.getElementById('equip-chestplate').value,
+            leggings: document.getElementById('equip-leggings').value,
+            boots: document.getElementById('equip-boots').value
+          } : {},
+          bossRespawnMessage: document.getElementById('bossRespawnMessage').value,
+          particles_options: { active: document.getElementById('particles-active').checked },
+          particles: { 
+            event: document.getElementById('particles-event').value, 
+            particle: document.getElementById('particles-particle').value 
+          },
+          attacks: getList('attacks'),
+          rewards: {} 
+        };
+        
+        // Add version-specific fields
         if (currentVersion === '4.0.0') {
-          boss.rewards[rkey] = { 
-            reward: { type }
-          };
-          if (type === 'command') {
-            boss.rewards[rkey].reward.commands = [value];
-          } else if (type === 'item') {
-            boss.rewards[rkey].reward.item = value;
-            boss.rewards[rkey].reward.amount = +amount;
-          } else {
-            boss.rewards[rkey].reward.itemgroup = value;
-            boss.rewards[rkey].reward.amount = +amount;
-          }
+          boss.chance = +document.getElementById('chance').value;
         } else {
-          boss.rewards[rkey] = { type };
-          if (type === 'command') {
-            boss.rewards[rkey].commands = [value];
-          } else if (type === 'item') {
-            boss.rewards[rkey].item = value;
-            boss.rewards[rkey].amount = +amount;
-          } else if (type === 'denarius') {
-            boss.rewards[rkey].reward.item = value;
-            boss.rewards[rkey].reward.amount = +amount;
-          } else {
-            boss.rewards[rkey].itemgroup = value;
-            boss.rewards[rkey].amount = +amount;
-          }
+          boss.triggers = {
+            on_defeat: document.getElementById('trigger-defeat').value,
+            on_invoke: document.getElementById('trigger-invoke').value
+          };
         }
-      });
-      
-      const full = { 
-        BossVersion: currentVersion === '4.0.0' ? '0.5' : '0.5',
-        bosses: { [key]: boss } 
-      };
-      
-      const yaml = jsyaml.dump(full, { noRefs: true, sortKeys: false });
-      
-      // Display and make downloadable
-      document.getElementById('output').textContent = yaml;
-      
-      const blob = new Blob([yaml], { type: 'text/yaml' });
-      const downloadLink = document.getElementById('download-link');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.classList.remove('hidden');
+        
+        // Process rewards (fixed top_1, top_2, top_3)
+        document.querySelectorAll('#rewards-container .grid').forEach(row => {
+          const rkey = row.querySelector('input[type="text"]').value;
+          if (!rkey) return;
+          
+          const type = row.querySelector('.reward-type').value;
+          const value = row.querySelector('.reward-value').value;
+          const amount = row.querySelector('.reward-amount-input')?.value;
+          
+          if (currentVersion === '4.0.0') {
+            boss.rewards[rkey] = { 
+              reward: { type }
+            };
+            if (type === 'command') {
+              boss.rewards[rkey].reward.commands = [value];
+            } else if (type === 'item') {
+              boss.rewards[rkey].reward.item = value;
+              boss.rewards[rkey].reward.amount = +amount;
+            } else {
+              boss.rewards[rkey].reward.itemgroup = value;
+              boss.rewards[rkey].reward.amount = +amount;
+            }
+          } else {
+            boss.rewards[rkey] = { type };
+            if (type === 'command') {
+              boss.rewards[rkey].commands = [value];
+            } else if (type === 'item') {
+              boss.rewards[rkey].item = value;
+              boss.rewards[rkey].amount = +amount;
+            } else if (type === 'denarius') {
+              boss.rewards[rkey].reward.item = value;
+              boss.rewards[rkey].reward.amount = +amount;
+            } else {
+              boss.rewards[rkey].itemgroup = value;
+              boss.rewards[rkey].amount = +amount;
+            }
+          }
+        });
+        
+        const full = { 
+          BossVersion: currentVersion === '4.0.0' ? '0.5' : '0.5',
+          bosses: { [key]: boss } 
+        };
+        
+        const yaml = jsyaml.dump(full, { noRefs: true, sortKeys: false });
+        
+        // Display and make downloadable
+        document.getElementById('output').textContent = yaml;
+        
+        const blob = new Blob([yaml], { type: 'text/yaml' });
+        const downloadLink = document.getElementById('download-link');
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.classList.remove('hidden');
+        
+        // Show success message
+        showAlert('¡YAML generado con éxito! Verifica que todo esté correcto antes de usarlo.', 'success');
+        
+      } catch (error) {
+        console.error('Error generating YAML:', error);
+        showAlert(`Error al generar el YAML: ${error.message}`, 'error');
+      }
     }
   </script>
 </body>
